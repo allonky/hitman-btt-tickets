@@ -228,6 +228,7 @@ async function liveCheck(uid){
   var j = await r.json();
   if (j.error === 'bad key') { try { localStorage.removeItem('hbtt_door_key'); } catch(e){} return {success:false, error:'Wrong door key', detail:'Reload the page and enter the door key again.', short:'key'}; }
   if (!j.ok) return {success:false, error:j.error || 'Not valid', detail:j.detail || ('Ticket ' + uid), short:j.short || 'rejected', name:j.name};
+  if (j.test) { var tk = j.ticket || {}; return {success:true, ticket:{ name:(tk.name || '') + ' (TEST TICKET)', day:tk.day, ticketType:'Sandbox test · ' + (tk.ticketType || '') }}; }
   return {success:true, ticket:j.ticket};
 }
 
