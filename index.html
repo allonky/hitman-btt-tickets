@@ -1,0 +1,757 @@
+<meta charset="utf-8">
+<title>Hitman Blind Taste Test Colorado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600&display=swap">
+<style>
+  /* The Reserve site tokens (styles-sx62olh5.css) with the event's own accent for the hero */
+  :root{
+    --cream:#f7f4eb; --paper:#f4f1e8; --sand:#f0e2cb; --surface-raised:#fbf9f3;
+    --ink:#171b26; --ink-dark:#0e1117; --ink-light:#2a2f3d;
+    --ink-secondary:#5a5d68; --sage:#b4b8a5; --sage-text:#626759; --sage-deep:#8e9382;
+    --terracotta:#e26944; --terracotta-text:#b93c17; --rule-gold:rgba(226,105,68,.2);
+    --amber:#E0A33E; --hero-muted:#a89c8b; --hero-rule:#3a3f4c;
+    --font-display:"EB Garamond","Garamond Premier",Georgia,serif;
+    --font-ui:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --font-wordmark:"Anton",Impact,"Arial Narrow",sans-serif;
+    --max-wide:1200px; --max-content:960px; --max-text:680px;
+    --gutter:clamp(20px,5vw,80px);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:light}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-display);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+  p{margin:0}
+  .eyebrow{font-family:var(--font-ui);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-text)}
+  .gold-rule{width:3rem;height:1px;background:var(--terracotta);opacity:.6;margin:14px 0 0}
+  .wrap{max-width:var(--max-wide);margin:0 auto;padding:0 var(--gutter)}
+  .content{max-width:var(--max-content);margin:0 auto}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 1.75rem;border-radius:.375rem;border:1px solid var(--ink);background:var(--ink);color:var(--cream);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .5s var(--ease)}
+  .btn:hover{background:var(--ink-light)}
+  .btn:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
+  .btn-amber{background:var(--amber);border-color:var(--amber);color:var(--ink-dark)}
+  .btn-amber:hover{background:#edb25c;border-color:#edb25c}
+  .btn-ghost-cream{background:transparent;border-color:rgba(247,244,235,.5);color:var(--cream)}
+  .btn-ghost-cream:hover{border-color:var(--cream);background:rgba(247,244,235,.06)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:var(--sand)}
+
+  /* site header */
+  .site-head{position:sticky;top:0;z-index:20;background:rgba(247,244,235,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(180,184,165,.35)}
+  .site-head .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .back{font-family:var(--font-ui);font-size:12px;letter-spacing:.04em;text-decoration:none;display:flex;gap:.5rem;align-items:center;color:var(--ink-secondary)}
+  .logo{font-family:var(--font-ui);font-weight:600;letter-spacing:.32em;font-size:13px;text-transform:uppercase}
+  .cart{position:relative;width:36px;height:36px;display:grid;place-items:center;border:0;background:none;cursor:pointer;color:var(--ink)}
+  .cart .count{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--terracotta);color:var(--cream);font:500 10px/18px var(--font-ui);display:none}
+  .cart .count.on{display:block}
+
+  /* hero */
+  .hero{background:var(--ink-dark);color:var(--cream);padding:72px 0 64px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:auto -10% -40% -10%;height:70%;background:radial-gradient(60% 60% at 50% 100%,rgba(224,163,62,.14),transparent 70%);pointer-events:none}
+  .hero .wrap{position:relative;z-index:1}
+  .hero-top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;border-top:5px solid var(--cream);padding-top:14px;font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--hero-muted)}
+  .wordmark{margin-top:40px;font-family:var(--font-wordmark);text-transform:uppercase;line-height:.92;display:flex;flex-direction:column}
+  .wordmark .l1{font-size:clamp(64px,13vw,168px);letter-spacing:.06em}
+  .wordmark .l2{font-size:clamp(46px,9.5vw,120px);letter-spacing:.02em}
+  .wordmark .l3{font-size:clamp(88px,18vw,236px);letter-spacing:.28em;margin-right:-.28em;color:var(--amber)}
+  .call{margin-top:32px;border:3px solid var(--cream);padding:14px 20px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;font-family:var(--font-ui);font-size:clamp(13px,1.6vw,20px);font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+  .call .opt{display:inline-flex;align-items:center;gap:10px}
+  .call .box{width:.95em;height:.95em;border:3px solid var(--cream);display:inline-block}
+  .call .ask{margin-left:auto;color:var(--amber);font-weight:600}
+  .thesis{margin-top:34px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end}
+  .thesis p.big{font-size:clamp(22px,2.6vw,32px);line-height:1.25;max-width:22ch}
+  .thesis p.big em{font-style:italic;color:var(--amber)}
+  .thesis .facts{font-family:var(--font-ui);font-size:13px;letter-spacing:.04em;color:var(--hero-muted);display:grid;gap:8px;border-left:1px solid var(--hero-rule);padding-left:20px}
+  .thesis .facts b{color:var(--cream);font-weight:600}
+  .hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-cta .price{font-family:var(--font-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--hero-muted);margin-left:6px}
+  .hero-cta .price b{color:var(--amber);font-weight:600}
+  .countdown{margin-top:44px;border-top:1px solid var(--hero-rule);padding-top:18px;display:flex;gap:28px;flex-wrap:wrap;align-items:baseline;font-family:var(--font-ui)}
+  .countdown .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hero-muted)}
+  .countdown .t{display:flex;gap:22px}
+  .countdown .t div{display:flex;flex-direction:column;align-items:flex-start}
+  .countdown .t b{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1;color:var(--cream)}
+  .countdown .t span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--hero-muted);margin-top:6px}
+
+  /* sections */
+  section.block{padding:clamp(64px,8vw,112px) 0}
+  section.block + section.block{border-top:1px solid rgba(180,184,165,.35)}
+  .head{max-width:var(--max-text)}
+  .head h2{font-size:clamp(38px,5.5vw,64px);line-height:1;letter-spacing:-.02em;margin-top:14px}
+  .head h2 .swash{font-style:italic;color:var(--terracotta-text)}
+  .lede{max-width:var(--max-text);margin-top:26px;font-size:20px;line-height:1.55;color:var(--ink-light)}
+  .prose{max-width:var(--max-text);margin-top:20px;display:grid;gap:16px;color:var(--ink-light)}
+  .prose strong{font-weight:500;color:var(--ink)}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .card{border:1px solid var(--sage);border-radius:.5rem;padding:28px 26px 24px;background:transparent;display:flex;flex-direction:column;gap:14px;box-shadow:5px 9px 24px -14px rgba(23,27,38,.16)}
+  .card h3{font-size:27px;line-height:1.06;letter-spacing:-.01em}
+  .card p{color:var(--ink-light);font-size:17px}
+  .card .tag{margin-top:auto;font-family:var(--font-display);font-style:italic;font-size:15px;color:var(--sage-text)}
+  .card.dark{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+  .card.dark p{color:rgba(247,244,235,.8)}
+  .card.dark .tag{color:var(--amber)}
+  .stat{font-family:var(--font-ui);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text)}
+  .stat b{display:block;font-family:var(--font-display);font-size:44px;letter-spacing:-.02em;color:var(--ink);font-weight:400;line-height:1;margin-bottom:6px}
+
+  /* schedule */
+  .days{margin-top:44px;display:grid;gap:0;border-top:1px solid var(--sage)}
+  .day{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:30px 0;border-bottom:1px solid var(--sage)}
+  .day .when{font-family:var(--font-ui)}
+  .day .when b{display:block;font-size:22px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--terracotta-text)}
+  .day .when span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text);margin-top:6px}
+  .day h3{font-size:30px;line-height:1.1;letter-spacing:-.01em}
+  .day .where{font-family:var(--font-ui);font-size:13px;letter-spacing:.04em;color:var(--sage-text);margin-top:6px}
+  .day p{margin-top:14px;color:var(--ink-light);max-width:60ch}
+  .rundown{margin:16px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px 24px;font-family:var(--font-ui);font-size:13px;color:var(--ink-secondary)}
+  .rundown li b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;margin-right:8px}
+
+  /* tickets */
+  .tickets{background:var(--paper);background-image:linear-gradient(rgba(240,226,203,.35),rgba(240,226,203,.35))}
+  .ticket-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;margin-top:44px;align-items:start}
+  .passes{display:grid;gap:16px}
+  .pass{background:var(--surface-raised);border:1px solid var(--sage);border-radius:.5rem;padding:24px 26px;display:grid;grid-template-columns:1fr auto;gap:8px 24px;align-items:center;transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+  .pass.selected{border-color:var(--ink);box-shadow:0 4px 17px -8px rgba(23,27,38,.16),11px 20px 40px -22px rgba(23,27,38,.28)}
+  .pass .name{font-size:26px;line-height:1.1;letter-spacing:-.01em}
+  .pass .sub{font-family:var(--font-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-text);margin-top:6px}
+  .pass .price{font-family:var(--font-ui);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+  .pass .price small{display:block;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text);margin-top:4px}
+  .pass .left{grid-column:1/-1;font-family:var(--font-ui);font-size:12px;color:var(--terracotta-text);letter-spacing:.04em}
+  .pass .left i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--terracotta);margin-right:8px;vertical-align:middle}
+  .pass button.pick{grid-column:1/-1;justify-self:start;padding:.65rem 1.25rem}
+  .summary{position:sticky;top:88px;background:var(--ink);color:var(--cream);border-radius:.5rem;padding:28px 28px 26px;display:grid;gap:18px}
+  .summary .eyebrow{color:var(--hero-muted)}
+  .summary h3{font-size:24px;line-height:1.1}
+  .qty{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--hero-rule);border-bottom:1px solid var(--hero-rule);padding:14px 0;font-family:var(--font-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--hero-muted)}
+  .stepper{display:flex;align-items:center;gap:14px}
+  .stepper button{width:30px;height:30px;border-radius:.25rem;border:1px solid var(--hero-rule);background:transparent;color:var(--cream);font:500 16px var(--font-ui);cursor:pointer}
+  .stepper button:hover{border-color:var(--cream)}
+  .stepper button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .stepper b{font-size:18px;font-weight:600;min-width:1.5ch;text-align:center;color:var(--cream);font-variant-numeric:tabular-nums}
+  .total{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-ui)}
+  .total span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hero-muted)}
+  .total b{font-size:30px;font-weight:600;font-variant-numeric:tabular-nums}
+  .summary .btn{width:100%}
+  .summary .fine{font-family:var(--font-ui);font-size:12px;line-height:1.5;color:var(--hero-muted)}
+  .summary .fine b{color:var(--cream);font-weight:500}
+  .pass.on{border-color:var(--ink);box-shadow:0 4px 17px -8px rgba(23,27,38,.16),11px 20px 40px -22px rgba(23,27,38,.28)}
+  .pass.sold{opacity:.55}
+  .pass.sold .name{text-decoration:line-through;text-decoration-color:var(--terracotta);text-decoration-thickness:3px}
+  .pass .stepper{grid-column:1/-1;justify-self:start}
+  .pass .stepper button{border-color:var(--sage);color:var(--ink);width:40px;height:40px;font-size:20px}
+  .pass .stepper button:hover{border-color:var(--ink)}
+  .pass .stepper b{color:var(--ink);font-size:20px}
+  .pass .stepper .lbl{font-family:var(--font-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-text);margin-left:4px}
+  .pass .names{grid-column:1/-1;display:grid;gap:8px}
+  .pass .names:empty{display:none}
+  .pass .names label{font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-text);display:block}
+  .pass .names input{display:block;width:100%;margin-top:4px;font-family:var(--font-display);font-size:18px;color:var(--ink);background:#fff;border:1px solid var(--sage);border-radius:.25rem;padding:10px 12px;min-height:44px}
+  .pass .names input:focus{outline:2px solid var(--ink);outline-offset:1px}
+  .pass .names input.bad{border-color:var(--terracotta)}
+  .lines{display:grid;gap:8px;font-family:var(--font-ui);font-size:14px}
+  .lines .empty{color:var(--hero-muted);font-family:var(--font-display);font-size:16px;margin:0}
+  .lines .ln{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--hero-rule);padding-bottom:8px}
+  .lines .ln b{font-weight:600;font-variant-numeric:tabular-nums}
+  .buyer{display:grid;gap:10px}
+  .buyer label{font-family:var(--font-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--hero-muted);display:block}
+  .buyer input{display:block;width:100%;margin-top:5px;font-family:var(--font-display);font-size:17px;color:var(--ink);background:var(--cream);border:1px solid var(--hero-rule);border-radius:.25rem;padding:10px 12px;min-height:44px}
+  .buyer input:focus{outline:2px solid var(--amber);outline-offset:1px}
+  .buyer input.bad{border:2px solid var(--terracotta)}
+  .buyer-err{margin:0;font-family:var(--font-ui);font-size:12px;color:#ffb3a0;font-weight:600}
+  .paypal-wrap{background:#F4EFE4;padding:14px 14px 10px;border-radius:.375rem}
+  .paypal-wrap.idle #paypal-buttons{opacity:.55}
+  #paypal-buttons{color-scheme:light;min-height:96px}
+  #paypal-buttons iframe{color-scheme:light}
+  .pay-hint{margin:8px 0 0;font-family:var(--font-ui);font-size:11px;line-height:1.5;color:#5a5040}
+  .pay-nudge{color:#b93c17!important;font-weight:600}
+  .receipt{margin-top:44px;background:var(--surface-raised);border:2px solid var(--amber);border-radius:.5rem;padding:32px}
+  .receipt h3{font-size:34px;line-height:1.05;margin-top:8px}
+  .receipt p{margin-top:12px;color:var(--ink-light)}
+  .receipt .tix{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+  .receipt .tk{background:#fff;border:1px solid var(--sage);border-radius:.5rem;padding:18px;text-align:center}
+  .receipt .tk .t{font-family:var(--font-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text)}
+  .receipt .tk .n{font-size:22px;line-height:1.1;margin:6px 0 10px}
+  .receipt .tk img{width:200px;height:200px;display:block;margin:0 auto}
+  .receipt .tk code{display:block;font-family:Menlo,monospace;font-size:17px;letter-spacing:.08em;margin-top:10px}
+  .receipt .tk a{display:inline-block;margin-top:10px;font-family:var(--font-ui);font-size:12px}
+  .receipt .wait{font-family:var(--font-ui);font-size:13px;color:var(--sage-text)}
+  .covers{margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .covers div{border-top:1px solid var(--sage);padding-top:16px}
+  .covers .k{font-family:var(--font-ui);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-text)}
+  .covers p{margin-top:10px;font-size:17px;color:var(--ink-light)}
+  .rules-line{margin-top:34px;font-family:var(--font-ui);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta-text);display:flex;gap:18px;flex-wrap:wrap}
+
+  /* room */
+  .floors{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .floor{border:1px solid var(--sage);border-radius:.5rem;padding:24px 26px;display:grid;gap:8px}
+  .floor .k{font-family:var(--font-ui);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-text)}
+  .floor h3{font-size:26px;line-height:1.1}
+  .floor p{color:var(--ink-light);font-size:17px}
+  .floor.hot{border-color:var(--terracotta);background:rgba(226,105,68,.05)}
+  .floor.hot .k{color:var(--terracotta-text)}
+  .getting{margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;font-family:var(--font-ui);font-size:14px;color:var(--ink-secondary);line-height:1.6}
+  .getting b{display:block;font-weight:600;color:var(--ink);letter-spacing:.04em;text-transform:uppercase;font-size:12px;margin-bottom:6px}
+
+  .stay{margin-top:40px;border-top:1px solid var(--sage);padding-top:26px}
+  .stay > p{margin-top:10px;color:var(--ink-light);max-width:60ch}
+  .hotels{margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .hotel{display:grid;grid-template-columns:1fr auto;gap:2px 14px;align-items:center;padding:14px 16px;border:1px solid var(--sage);border-radius:.375rem;text-decoration:none;color:var(--ink);background:var(--surface-raised);transition:border-color .3s var(--ease)}
+  .hotel:hover{border-color:var(--ink)}
+  .hotel b{font-weight:500;font-size:19px;line-height:1.1}
+  .hotel span{grid-column:1;font-family:var(--font-ui);font-size:12px;color:var(--sage-text);letter-spacing:.02em}
+  .hotel i{grid-column:2;grid-row:1/3;font-style:normal;font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--terracotta-text)}
+  @media (max-width:600px){.hotels{grid-template-columns:1fr}}
+  /* contacts */
+  .contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .contacts .card a{font-family:var(--font-ui);font-size:13px;letter-spacing:.04em;color:var(--terracotta-text);text-decoration:none;word-break:break-all}
+  .contacts .card a:hover{text-decoration:underline}
+
+  /* fine print */
+  .fine-list{margin:36px 0 0;padding:0;list-style:none;columns:2;column-gap:44px;font-family:var(--font-ui);font-size:14px;line-height:1.6;color:var(--ink-secondary);max-width:var(--max-content)}
+  .fine-list li{break-inside:avoid;padding:10px 0;border-top:1px solid rgba(180,184,165,.45)}
+  .fine-list li b{color:var(--ink);font-weight:600}
+
+  /* footer */
+  footer{background:var(--ink);color:var(--cream);padding:56px 0 40px;margin-top:0}
+  footer .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start}
+  footer .news h3{font-size:24px}
+  footer .news p{color:rgba(247,244,235,.7);margin-top:8px;font-size:16px}
+  footer form{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  footer input{flex:1;min-width:200px;background:transparent;border:0;border-bottom:1px solid var(--hero-rule);color:var(--cream);padding:10px 0;font:16px var(--font-display)}
+  footer input:focus{outline:none;border-bottom-color:var(--amber)}
+  footer .meta{font-family:var(--font-ui);font-size:12px;letter-spacing:.06em;color:var(--hero-muted);display:grid;gap:10px;justify-items:end;text-align:right}
+  footer .meta a{color:var(--cream);text-decoration:none}
+  footer .meta .links{display:flex;gap:18px}
+
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--cream);padding:14px 20px;border-radius:.375rem;font-family:var(--font-ui);font-size:13px;letter-spacing:.02em;box-shadow:0 18px 44px rgba(20,20,19,.25);transition:all .4s var(--ease);z-index:30;max-width:calc(100% - 40px);text-align:center}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+  .toast b{color:var(--amber);font-weight:600}
+
+  @media (max-width:900px){
+    .thesis{grid-template-columns:1fr}
+    .cols,.covers,.contacts,.getting{grid-template-columns:1fr 1fr}
+    .ticket-grid{grid-template-columns:1fr}
+    .summary{position:static}
+    .day{grid-template-columns:1fr;gap:10px}
+    footer .wrap{grid-template-columns:1fr}
+    footer .meta{justify-items:start;text-align:left}
+  }
+  @media (max-width:600px){
+    body{font-size:17px}
+    .cols,.covers,.contacts,.getting,.floors{grid-template-columns:1fr}
+    .fine-list{columns:1}
+    .pass{grid-template-columns:1fr}
+    .pass .price{text-align:left}
+    .call .ask{margin-left:0}
+    .site-head .back span{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important}
+  }
+</style>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="back" href="https://reservethereserve.com/" aria-label="The Reserve">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+      <span>Back to Home</span>
+    </a>
+    <div class="logo">The Reserve</div>
+    <button class="cart" id="cartBtn" aria-label="Cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+      <span class="count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div>Dracup Productions × The Reserve</div>
+        <div>Denver · Colorado · October 9 to 11, 2026</div>
+      </div>
+
+      <h1 class="wordmark" aria-label="Hitman Blind Taste Test">
+        <span class="l1">Hitman</span>
+        <span class="l2">Blind Taste</span>
+        <span class="l3">Test</span>
+      </h1>
+
+      <div class="call" role="group" aria-label="Live resin or live rosin, is your palate discerning enough to tell the difference">
+        <span class="opt"><span class="box" aria-hidden="true"></span>Live Resin</span>
+        <span class="opt"><span class="box" aria-hidden="true"></span>Live Rosin</span>
+        <span class="ask">Is your palate discerning enough to tell the difference?</span>
+      </div>
+
+      <div class="thesis">
+        <p class="big">Nobody has ever passed the test. Pass it and win <em>$1,000's in prizes</em> from the top companies in the industry.</p>
+        <div class="facts">
+          <div><b>Est. 2019</b> · Los Angeles</div>
+          <div><b>Stops</b> · LA · Chicago · Michigan · New York · Colorado</div>
+          <div><b>Perfect runs to date</b> · 0</div>
+          <div><b>You</b> are the judge</div>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-amber" href="#tickets">Get your testing pass</a>
+        <a class="btn btn-ghost-cream" href="#test">How the test works</a>
+        <span class="price"><b>$200 per day</b> · Sat Oct 10 · Sun Oct 11 · Presale only · Preparty from $20</span>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <span class="lbl">Doors open Saturday Oct 10 · 12 PM</span>
+        <div class="t" aria-live="off">
+          <div><b id="cd-d">00</b><span>days</span></div>
+          <div><b id="cd-h">00</b><span>hours</span></div>
+          <div><b id="cd-m">00</b><span>min</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="test">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">The test</div>
+        <h2>You are <span class="swash">the judge.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <p class="lede">Ticket buyers are the judges. You take the test at any of ten sponsor branded testing stations across the building, each served by a house dabtender. One display case, one spot on the floor, every entry behind glass, numbered and lit. It is the only place you will ever see them. Every station serves every entry from sealed jars you never see. Blindfold on. The dabtender serves the dab. Blindfold off, you score it on your card. What you saw in the case and what you tasted in the dark is all you get. No labels. No brands.</p>
+      <div class="prose">
+        <p>Your scorecard lives on your phone, unlocked by the judge code on your ticket. A line for every strain: your notes, a flavor score from 1 to 10, and one box. Then you make the call that has beaten every judge since 2019: <strong>live resin or live rosin.</strong></p>
+        <p>Cards close at 6, the key is unsealed on stage and the room finds out together. Ten stations minimum, spread through the building, so the line is never the event.</p>
+      </div>
+
+      <div class="cols">
+        <div class="card">
+          <h3>Pick a station</h3>
+          <p>Ten branded testing stations across the building, each run by a sponsor and each stocked with every entry in sealed jars. Nothing to look at. Step up to any open one, call a number, put the blindfold on, take the dab. Work the board at your own pace all day.</p>
+          <div class="tag">Every entry at every station</div>
+        </div>
+        <div class="card">
+          <h3>Make the call</h3>
+          <p>Notes on the strain. A flavor score from 1 to 10, where 10 is the best dab you have ever had and 1 is absolute trash. Then one box: live resin or live rosin. Every strain, every call, one card.</p>
+          <div class="tag">Your scorecard is the whole test</div>
+        </div>
+        <div class="card dark">
+          <h3>Pass it</h3>
+          <p>Every resin or rosin box on your card checked right passes the test. One miss and the streak lives on. Best card of the day still takes Top Palate.</p>
+          <div class="tag">Undefeated since 2019</div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="block" id="weekend">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">The weekend</div>
+        <h2>Three days. <span class="swash">Two sittings.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <p class="lede">Friday warms the room at Explore Glass Gallery, tickets from $20. Saturday is the test. Sunday is a second full day with its own 100 passes.</p>
+
+      <div class="days">
+        <article class="day">
+          <div class="when"><b>Fri Oct 09</b><span>6 PM</span></div>
+          <div>
+            <h3>The Preparty</h3>
+            <div class="where">Explore Glass Gallery · Denver · GA $20 · VIP $100, 20 only</div>
+            <p>Separate ticket, separate room. Glass show, welcome mic with Dougie and the tour crew. Pass holders can check in early, grab their wristband and merch, and skip the Saturday line. Address goes out by email after you buy.</p>
+          </div>
+        </article>
+        <article class="day">
+          <div class="when"><b>Sat Oct 10</b><span>Doors 12 PM · Last dabs 6 PM</span></div>
+          <div>
+            <h3>The Test</h3>
+            <div class="where">The Reserve · LoDo Denver</div>
+            <p>Doors and stations open at noon. Ten branded testing stations, vendor tables and raffles run all day across four floors. Last dabs at 6. Results ceremony at 6:30.</p>
+            <ul class="rundown">
+              <li><b>12:00</b>Doors · stations open</li>
+              <li><b>3:00</b>Vendor spotlight · raffle 1</li>
+              <li><b>5:45</b>Last dab call</li>
+              <li><b>6:00</b>Stations close · cards in</li>
+              <li><b>6:30</b>Results ceremony · I Passed The Test</li>
+            </ul>
+          </div>
+        </article>
+        <article class="day">
+          <div class="when"><b>Sun Oct 11</b><span>Doors 12 PM · Last dabs 6 PM</span></div>
+          <div>
+            <h3>The Second Sitting</h3>
+            <div class="where">The Reserve · LoDo Denver</div>
+            <p>Same test, same ten stations, its own 100 passes. Last dabs at 6, results ceremony at 6:30. Saturday's winners on display. Sunday night the producers get theirs: Best Taste, Best Live Resin, Best Live Rosin and People's Choice, scored across both days.</p>
+          </div>
+        </article>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="block" id="vault">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">The vault</div>
+        <h2>Pass the test. <span class="swash">Take the vault.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <p class="lede">Glass, merch and store credit from the brands in the building. The vault grows with every sponsor announcement and only what is physically committed gets counted.</p>
+      <div class="cols">
+        <div class="card"><div class="stat"><b>$1,000's</b>in prizes</div><p>Committed vault value gets posted here as sponsors sign on. Watch @hitmanblindtastetest and @reservethereserve for every reveal.</p></div>
+        <div class="card"><div class="stat"><b>0</b>passers ever</div><p>Every stop since 2019 has ended with the streak intact. Colorado is the biggest sitting the tour has ever run. Somebody is going to break it.</p></div>
+        <div class="card"><div class="stat"><b>1</b>Top Palate per day</div><p>No passer? The best card of the day still walks with a prize package and the title. The streak rolls to the next city.</p></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="block tickets" id="tickets">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">Tickets</div>
+        <h2>Testing <span class="swash">passes.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <p class="lede">$200 to take the test on Saturday. $200 to take the test on Sunday. Separate passes. 100 judge passes per day only, buy both if you want both. The preparty is its own ticket, $20 GA or $100 VIP. Presale only, nothing is sold at the door. Your name goes on the ticket and your ID gets you in.</p>
+
+      <div class="ticket-grid" id="eventTickets">
+        <div class="passes" id="passes">
+          <div class="pass" data-sku="HBTT-TK-SAT">
+            <div><div class="name">Saturday Testing Pass</div><div class="sub">Sat Oct 10 · The Test · doors 12 PM</div></div>
+            <div class="price">$200<small>per pass</small></div>
+            <div class="left"><i></i><span class="left-txt">100 of 100 remaining</span></div>
+            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Saturday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Saturday pass">+</button><span class="lbl">passes</span></div>
+            <div class="names"></div>
+          </div>
+          <div class="pass" data-sku="HBTT-TK-SUN">
+            <div><div class="name">Sunday Testing Pass</div><div class="sub">Sun Oct 11 · The Second Sitting · doors 12 PM</div></div>
+            <div class="price">$200<small>per pass</small></div>
+            <div class="left"><i></i><span class="left-txt">100 of 100 remaining</span></div>
+            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Sunday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Sunday pass">+</button><span class="lbl">passes</span></div>
+            <div class="names"></div>
+          </div>
+          <div class="pass" data-sku="HBTT-TK-VIP">
+            <div><div class="name">Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery · 6 PM</div></div>
+            <div class="price">$100<small>per ticket</small></div>
+            <div class="left"><i></i><span class="left-txt">20 of 20 remaining</span></div>
+            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
+            <div class="names"></div>
+          </div>
+          <div class="pass" data-sku="HBTT-TK-GA">
+            <div><div class="name">Preparty GA</div><div class="sub">Fri Oct 9 · Explore Glass Gallery · 6 PM</div></div>
+            <div class="price">$20<small>per ticket</small></div>
+            <div class="left"><i></i><span class="left-txt">General admission</span></div>
+            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer GA ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more GA ticket">+</button><span class="lbl">tickets</span></div>
+            <div class="names"></div>
+          </div>
+        </div>
+
+        <aside class="summary" id="summary" aria-label="Your order">
+          <div class="eyebrow">Your order</div>
+          <div class="lines" id="lines"><p class="empty">Pick your passes on the left.</p></div>
+          <form class="buyer" id="buyer" autocomplete="on" novalidate>
+            <label>Your name<input type="text" name="name" required autocomplete="name"></label>
+            <label>Email, the tickets go here<input type="email" name="email" required autocomplete="email" inputmode="email"></label>
+            <label>Phone<input type="tel" name="phone" required autocomplete="tel" inputmode="tel"></label>
+            <p class="buyer-err" id="buyer-err" hidden>Name, email and phone, and a name on every testing pass, before you pay.</p>
+          </form>
+          <div class="total"><span>Total</span><b id="total">$0</b></div>
+          <div class="paypal-wrap" id="paypal-wrap"><div id="paypal-buttons"></div><p class="pay-hint">PayPal or any card. No PayPal account needed.</p></div>
+          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. Max 4 passes per day per order. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
+        </aside>
+      </div>
+
+      <div class="receipt" id="receipt" hidden>
+        <div class="eyebrow">You are in</div>
+        <h3 id="receipt-title">Your tickets</h3>
+        <p id="receipt-note">They are also in your inbox. Your phone is the ticket: show the QR and an ID with the same name at the door.</p>
+        <div class="tix" id="receipt-tix"></div>
+      </div>
+
+      <div class="covers">
+        <div><div class="k">Hardware at the station</div><p>Rigs, e rigs and glass at every one of the ten stations. Nothing to bring.</p></div>
+        <div><div class="k">Your ticket on your phone</div><p>A QR code with your name on it, emailed after you buy. Nothing to print. Scan in at the door.</p></div>
+        <div><div class="k">Scorecard on your phone</div><p>A judge code on your ticket unlocks your card. Score every strain as you go: notes, flavor 1 to 10, resin or rosin. Submit and your result is on your screen and in your inbox that second.</p></div>
+        <div><div class="k">Merch item</div><p>An event merch piece in your hand at check in.</p></div>
+      </div>
+
+      <div class="rules-line">
+        <span>Presale only</span><span>No door sales</span><span>21+</span><span>Private event</span><span>Named tickets</span>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="block" id="room">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">The room</div>
+        <h2>The Reserve, <span class="swash">LoDo.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <p class="lede">A four level historic loft in downtown Denver, half a block from Coors Field, three blocks from Union Station, seven hotels within a walk. The whole building is ours for the weekend, with testing stations on three floors and voting on all four. Every tour stop before this one ran out of testing space. This one will not.</p>
+
+      <div class="floors">
+        <div class="floor"><div class="k">Floor 1</div><h3>Check in, stations, vendors</h3><p>Will call, pool tables, the bar running NA all weekend, four testing stations and vendor tables.</p></div>
+        <div class="floor hot"><div class="k">Floor 2 · the main floor</div><h3>Stations and the pro kitchen</h3><p>Four testing stations in the dining room, fed from the kitchen. The heart of the test.</p></div>
+        <div class="floor"><div class="k">Piano Loft</div><h3>No station, the view</h3><p>Mezzanine seating over the floor, no station up here. DJ and piano moments and an iPad voting station. Where you catch your breath between dabs.</p></div>
+        <div class="floor"><div class="k">Floor 3</div><h3>VIP Sky Suite</h3><p>Two stations, sponsor VIP, entrant hangout and the awards after moment. Balcony views of Coors Field, consumption stays indoors.</p></div>
+      </div>
+
+      <div class="getting">
+        <div><b>After you buy</b>The address, your ticket QR code and your voting link are sent by email after your purchase. Private event, private address.</div>
+        <div><b>From the airport</b>Take the RTD A Line train from DEN straight to Union Station. 37 minutes, $10.50, every 15 minutes, first train 3:15 AM and last 1:20 AM. Walk to your hotel or the venue from there. No car needed all weekend.</div>
+        <div><b>Parking</b>Parking all around. The Parkwell lot behind the building, garages everywhere, street parking. All paid, all first come. Your parking is your responsibility.</div>
+      </div>
+
+      <div class="stay">
+        <div class="eyebrow">Where to stay</div>
+        <p>Every one of these is a short walk from Union Station and the venue. Book direct.</p>
+        <div class="hotels">
+        <a class="hotel" href="https://www.therallyhotel.com" target="_blank" rel="noopener"><b>The Rally Hotel at McGregor Square</b><span>Across the street from Coors Field</span><i>Book</i></a>
+        <a class="hotel" href="https://www.themavenhotel.com" target="_blank" rel="noopener"><b>The Maven Hotel at Dairy Block</b><span>Wazee St, one block over</span><i>Book</i></a>
+        <a class="hotel" href="https://www.theoxfordhotel.com" target="_blank" rel="noopener"><b>The Oxford Hotel</b><span>17th and Wazee, Denver's oldest</span><i>Book</i></a>
+        <a class="hotel" href="https://www.thecrawfordhotel.com" target="_blank" rel="noopener"><b>The Crawford Hotel</b><span>Inside Union Station, off the train</span><i>Book</i></a>
+        <a class="hotel" href="https://www.hyatt.com/thompson-hotels/denth-thompson-denver" target="_blank" rel="noopener"><b>Thompson Denver</b><span>16th and Market</span><i>Book</i></a>
+        <a class="hotel" href="https://www.hotelborndenver.com" target="_blank" rel="noopener"><b>Kimpton Hotel Born</b><span>Union Station plaza</span><i>Book</i></a>
+        <a class="hotel" href="https://www.indigodenver.com" target="_blank" rel="noopener"><b>Hotel Indigo Union Station</b><span>18th and Wewatta</span><i>Book</i></a>
+        <a class="hotel" href="https://www.hilton.com/en/hotels/dendtgi-hilton-garden-inn-denver-union-station/" target="_blank" rel="noopener"><b>Hilton Garden Inn Union Station</b><span>20th and Chestnut</span><i>Book</i></a>
+        <a class="hotel" href="https://www.monaco-denver.com" target="_blank" rel="noopener"><b>Kimpton Hotel Monaco</b><span>17th and Champa, ten minutes</span><i>Book</i></a>
+        <a class="hotel" href="https://www.brownpalace.com" target="_blank" rel="noopener"><b>The Brown Palace</b><span>Denver's grand dame, fifteen minutes</span><i>Book</i></a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="block" id="entries">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">Entries · vendors · sponsors</div>
+        <h2>Get in the <span class="swash">building.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <div class="contacts">
+        <div class="card">
+          <h3>Enter your product</h3>
+          <p>No entry fee. One ounce of a single strain, live resin or live rosin, no mixes, licensed brands only. Two competitor passes with every entry, four if you enter two or more strains. Product in hand by Oct 7 or your slot goes to the waitlist. 20 to 30 entries.</p>
+          <a href="mailto:blindtastetest@reservethereserve.com">blindtastetest@reservethereserve.com</a>
+        </div>
+        <div class="card">
+          <h3>Vend</h3>
+          <p>Six tables, $1,500 a day or $2,500 for both days. Glass, hardware, apparel, art, your merch. Non cannabis goods only. Tables are assigned and spread through the building, every one with real traffic.</p>
+          <a href="mailto:blindtastetest@reservethereserve.com">blindtastetest@reservethereserve.com</a>
+        </div>
+        <div class="card">
+          <h3>Sponsor a station</h3>
+          <p>Ten testing stations, one sponsor each. Brand it and put your salesperson behind it. Our dabtender serves the test at your table, your salesperson sells to every tester who steps up. Every sponsor puts a flagship product in the vault. Shirt, Hoodie, Scorecard, Wristband and Blindfold merch placements, or all five as Merch sponsor. Display case, Supporting, Presenting, exclusive e-rig and the Main "brought to you by" sponsorship also open. Ask for the sales sheet.</p>
+          <a href="mailto:blindtastetest@reservethereserve.com">blindtastetest@reservethereserve.com</a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="block" id="fine-print">
+    <div class="wrap"><div class="content">
+      <div class="head">
+        <div class="eyebrow">Fine print</div>
+        <h2>Know before <span class="swash">you buy.</span></h2>
+        <div class="gold-rule"></div>
+      </div>
+      <ul class="fine-list">
+        <li><b>Private event, 21+.</b> Government ID must match the name on the order at will call. No exceptions.</li>
+        <li><b>Presale only.</b> No tickets are sold at the door by anyone. 100 judge passes per day only. The list closes when passes sell out or on Oct 7, whichever comes first. The address, your ticket QR code and your voting link are emailed after purchase.</li>
+        <li><b>What the pass buys.</b> Your place at the testing stations, hardware at the station, your ticket QR, your phone scorecard, a merch item, the programming and building access for the day. Nothing else is sold on site.</li>
+        <li><b>Transfers and refunds.</b> Name changes until Oct 7. No refunds. All tickets are final at purchase.</li>
+        <li><b>Passing the test.</b> Every resin or rosin call on your scorecard correct. If more than one judge passes, the vault is valued at MSRP and split equally between the passers.</li>
+        <li><b>Capacity.</b> The building holds 150. Ten stations keep the lines short. Live door count all day.</li>
+        <li><b>Consumption.</b> Indoors only. Never on a balcony or at a window. Hardware is at the stations. Torches only in the marked zone.</li>
+        <li><b>Preparty.</b> Friday Oct 9 at Explore Glass Gallery is its own ticket, $20 GA or $100 VIP with 20 VIP total. 21+. Address emailed after purchase.</li>
+        <li><b>Dry event.</b> The bar runs NA all weekend.</li>
+        <li><b>Security.</b> House security is on site all weekend. Follow staff direction.</li>
+        <li><b>Questions.</b> blindtastetest@reservethereserve.com</li>
+      </ul>
+    </div></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="news">
+      <h3>Sign up for our newsletter</h3>
+      <p>Be the first to know about our next event.</p>
+      <form onsubmit="event.preventDefault();toast('Thanks for subscribing. Check your inbox for a confirmation email.')">
+        <input type="email" placeholder="Email address" aria-label="Email address" required>
+        <button class="btn btn-amber" type="submit">Sign up</button>
+      </form>
+    </div>
+    <div class="meta">
+      <a href="mailto:blindtastetest@reservethereserve.com">blindtastetest@reservethereserve.com</a>
+      <div>© 2026 The Reserve. All rights reserved.</div>
+      <div class="links"><a href="https://reservethereserve.com/privacy">Privacy</a><a href="https://reservethereserve.com/terms">Terms</a><a href="https://reservethereserve.com/accessibility">Accessibility</a><a href="https://instagram.com/reservethereserve">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var C = window.HBTT || {};
+  var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
+  var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
+  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:4,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:4,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:100,cap:20,max:4,named:false}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:false} };
+  var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
+  var cart = {}, names = {}, sold = {};
+  var $ = function(id){ return document.getElementById(id); };
+  function money(n){ return '$' + n.toLocaleString('en-US'); }
+  try { var sv = JSON.parse(localStorage.getItem(KEY) || '{}'); cart = sv.cart || {}; names = sv.names || {}; } catch(e){}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify({cart:cart, names:names})); } catch(e){} }
+  function left(sku){ var c = CAT[sku]; return Math.max(0, c.cap - (sold[sku] || 0)); }
+  function cap(sku){ return Math.min(CAT[sku].max, left(sku)); }
+  function lines(){ return Object.keys(cart).filter(function(k){ return cart[k] > 0; }).map(function(k){ return {sku:k, name:CAT[k].name, price:CAT[k].price, qty:cart[k]}; }); }
+  function total(){ return lines().reduce(function(a,l){ return a + l.price * l.qty; }, 0); }
+
+  function render(){
+    document.querySelectorAll('.pass').forEach(function(p){
+      var sku = p.dataset.sku, q = cart[sku] || 0, c = CAT[sku], l = left(sku);
+      p.querySelector('.stepper b').textContent = q;
+      p.classList.toggle('on', q > 0);
+      var out = l <= 0; p.classList.toggle('sold', out);
+      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (l + ' of ' + c.cap + ' remaining'));
+      p.querySelector('[data-inc]').disabled = q >= cap(sku);
+      p.querySelector('[data-dec]').disabled = q <= 0;
+      var box = p.querySelector('.names'); var want = c.named ? q : 0;
+      while (box.children.length > want) box.lastChild.remove();
+      while (box.children.length < want) {
+        var i = box.children.length, lab = document.createElement('label');
+        lab.innerHTML = 'Name on pass ' + (i + 1) + '<input type="text" autocomplete="off" data-sku="' + sku + '" data-i="' + i + '" placeholder="Who is taking the test">';
+        lab.querySelector('input').value = (names[sku] && names[sku][i]) || '';
+        box.appendChild(lab);
+      }
+    });
+    var ls = lines(), html = '';
+    ls.forEach(function(l){ html += '<div class="ln"><span>' + l.qty + ' × ' + l.name + '</span><b>' + money(l.price * l.qty) + '</b></div>'; });
+    $('lines').innerHTML = html || '<p class="empty">Pick your passes on the left.</p>';
+    $('total').textContent = money(total());
+    var n = ls.reduce(function(a,l){ return a + l.qty; }, 0);
+    $('cartCount').textContent = n; $('cartCount').classList.toggle('on', n > 0);
+    $('paypal-wrap').classList.toggle('idle', n === 0);
+  }
+  $('passes').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var sku = b.closest('.pass').dataset.sku, q = cart[sku] || 0;
+    if (b.hasAttribute('data-inc')) { if (q < cap(sku)) q++; else toast(left(sku) <= 0 ? '<b>Sold out.</b>' : 'Max <b>' + CAT[sku].max + '</b> per order.'); }
+    if (b.hasAttribute('data-dec') && q > 0) q--;
+    cart[sku] = q; save(); render();
+  });
+  $('passes').addEventListener('input', function(e){
+    var i = e.target; if (!i.dataset.sku) return;
+    names[i.dataset.sku] = names[i.dataset.sku] || []; names[i.dataset.sku][+i.dataset.i] = i.value.trim(); save();
+  });
+  $('cartBtn').addEventListener('click', function(){ document.getElementById('tickets').scrollIntoView({behavior:'smooth'}); });
+
+  // buyer
+  var f = $('buyer');
+  try { var bv = JSON.parse(localStorage.getItem(FK) || '{}'); Object.keys(bv).forEach(function(k){ if (f.elements[k]) f.elements[k].value = bv[k]; }); } catch(e){}
+  f.addEventListener('input', function(){ try { localStorage.setItem(FK, JSON.stringify(buyer())); } catch(e){} });
+  f.addEventListener('submit', function(e){ e.preventDefault(); });
+  function buyer(){ var o = {}; ['name','email','phone'].forEach(function(k){ o[k] = (f.elements[k].value || '').trim(); }); return o; }
+  function valid(){
+    var b = buyer(), ok = true;
+    ['name','email','phone'].forEach(function(k){
+      var bad = !b[k] || (k === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(b[k])) || (k === 'phone' && b[k].replace(/\D/g,'').length < 10);
+      f.elements[k].classList.toggle('bad', bad); if (bad) ok = false;
+    });
+    document.querySelectorAll('.pass .names input').forEach(function(i){ var bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad) ok = false; });
+    $('buyer-err').hidden = ok;
+    if (!ok) { var first = document.querySelector('.bad'); if (first) first.scrollIntoView({behavior:'smooth', block:'center'}); }
+    return ok;
+  }
+  function attendees(){ var a = {}; Object.keys(cart).forEach(function(sku){ if (cart[sku] > 0 && CAT[sku].named) { a[sku] = []; for (var i = 0; i < cart[sku]; i++) a[sku].push((names[sku] && names[sku][i]) || ''); } }); return a; }
+
+  // stock
+  function pull(){ fetch(BACKEND + '/api/sold?t=' + Date.now(), {cache:'no-store'}).then(function(r){ return r.json(); }).then(function(j){ sold = j.sold || {}; Object.keys(cart).forEach(function(k){ if (cart[k] > cap(k)) cart[k] = cap(k); }); save(); render(); }).catch(function(){}); }
+  render(); pull(); setInterval(pull, 90000);
+
+  // PayPal
+  var s = document.createElement('script');
+  s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(CLIENT_ID) + '&currency=USD&intent=capture&disable-funding=paylater,venmo&enable-funding=card';
+  s.onload = initPP; s.onerror = function(){ $('paypal-wrap').innerHTML = '<p class="pay-hint">PayPal did not load. Email <a href="mailto:blindtastetest@reservethereserve.com">blindtastetest@reservethereserve.com</a> and we will send a PayPal invoice.</p>'; };
+  document.head.appendChild(s);
+  function nudge(msg){ var w = $('paypal-wrap'); var p = w.querySelector('.pay-nudge') || document.createElement('p'); p.className = 'pay-hint pay-nudge'; p.textContent = msg; w.appendChild(p); }
+  function initPP(){
+    if (!window.paypal) return;
+    paypal.Buttons({
+      style:{layout:'vertical', color:'gold', shape:'rect', label:'pay', height:48, tagline:false},
+      onClick:function(data, actions){
+        var n = document.querySelector('.pay-nudge'); if (n) n.remove();
+        if (!lines().length) { nudge('Pick at least one pass first.'); return actions.reject(); }
+        if (!valid()) return actions.reject();
+        return actions.resolve();
+      },
+      createOrder:function(data, actions){
+        var ls = lines(), tot = total(), b = buyer(), nm = b.name.split(/\s+/);
+        var payer = { email_address:b.email, name:{ given_name:nm[0] || b.name, surname:nm.slice(1).join(' ') || '' } };
+        var digits = b.phone.replace(/\D/g,''); if (digits.length >= 10) payer.phone = { phone_number:{ national_number:digits.slice(-10) } };
+        return actions.order.create({
+          intent:'CAPTURE', payer:payer,
+          application_context:{ shipping_preference:'NO_SHIPPING', brand_name:'Hitman Blind Taste Test Colorado', user_action:'PAY_NOW' },
+          purchase_units:[{
+            description:'Hitman Blind Taste Test Colorado tickets, Oct 9 to 11, 2026',
+            custom_id: ls.map(function(l){ return l.sku + ':' + l.qty; }).join(','),
+            soft_descriptor:'HITMAN BTT CO',
+            amount:{ currency_code:'USD', value:tot.toFixed(2), breakdown:{ item_total:{ currency_code:'USD', value:tot.toFixed(2) } } },
+            items: ls.map(function(l){ return { name:l.name, sku:l.sku, quantity:String(l.qty), category:'DIGITAL_GOODS', unit_amount:{ currency_code:'USD', value:l.price.toFixed(2) } }; })
+          }]
+        });
+      },
+      onApprove:function(data, actions){
+        return actions.order.capture().then(function(d){
+          var ls = lines(), tot = total(), b = buyer();
+          var cap0 = d.purchase_units && d.purchase_units[0].payments && d.purchase_units[0].payments.captures && d.purchase_units[0].payments.captures[0];
+          var id = (cap0 && cap0.id) || d.id;
+          var ln = {}; ls.forEach(function(l){ ln[l.sku] = l.qty; });
+          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), payerEmail:(d.payer && d.payer.email_address) || '', sandbox:SANDBOX };
+          fetch(BACKEND + '/api/order', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), keepalive:true }).catch(function(){});
+          ls.forEach(function(l){ sold[l.sku] = (sold[l.sku] || 0) + l.qty; });
+          cart = {}; names = {}; save(); render();
+          showReceipt(id, ls, b);
+        });
+      },
+      onError:function(err){ nudge('Payment did not go through. Try again or email blindtastetest@reservethereserve.com.'); console.error(err); }
+    }).render('#paypal-buttons');
+  }
+
+  function showReceipt(id, ls, b){
+    var r = $('receipt'); r.hidden = false;
+    $('receipt-title').textContent = 'Thanks, ' + (b.name.split(/\s+/)[0] || '') + '. You are in.';
+    $('receipt-tix').innerHTML = '<p class="wait">Issuing your ' + (ls.reduce(function(a,l){ return a + l.qty; }, 0) > 1 ? 'tickets' : 'ticket') + '. PayPal transaction ' + id + '.</p>';
+    r.scrollIntoView({behavior:'smooth', block:'start'});
+    var tries = 0;
+    (function poll(){
+      fetch(BACKEND + '/api/order?c=' + encodeURIComponent(id) + '&t=' + Date.now(), {cache:'no-store'}).then(function(x){ return x.json(); }).then(function(j){
+        if (j.ok && j.tickets && j.tickets.length) {
+          $('receipt-tix').innerHTML = j.tickets.map(function(t){
+            var sc = (t.day === 'Saturday' || t.day === 'Sunday') ? '<a href="' + C.SITE + '/score/?t=' + t.code + '">Open my scorecard</a>' : '';
+            return '<div class="tk"><div class="t">' + t.type + '</div><div class="n">' + (t.name || b.name) + '</div><img src="' + BACKEND + '/api/qr?c=' + t.code + '" alt="' + t.code + '"><code>' + t.code + '</code>' + sc + '</div>';
+          }).join('');
+          $('receipt-note').textContent = (j.emailed ? 'They are also in your inbox at ' + b.email + '. ' : 'The email copy is on its way to ' + b.email + '. ') + 'Your phone is the ticket: show the QR and an ID with the same name at the door. Screenshot this.';
+          return;
+        }
+        if (++tries < 15) setTimeout(poll, 2000);
+        else $('receipt-tix').innerHTML = '<p class="wait">Paid. Your tickets are being issued and will be in your inbox at ' + b.email + ' within a few minutes. PayPal transaction ' + id + '. If nothing arrives in 15 minutes, email blindtastetest@reservethereserve.com with that transaction number.</p>';
+      }).catch(function(){ if (++tries < 15) setTimeout(poll, 2500); });
+    })();
+  }
+
+  var tt;
+  function toast(html){ var t = $('toast'); t.innerHTML = html; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(function(){ t.classList.remove('on'); }, 3600); }
+  // Countdown to doors: Sat Oct 10 2026 12:00 Mountain Daylight Time (UTC-6)
+  var doors = Date.UTC(2026, 9, 10, 18, 0, 0);
+  function tick(){ var ms = Math.max(0, doors - Date.now()); $('cd-d').textContent = String(Math.floor(ms / 864e5)).padStart(2,'0'); $('cd-h').textContent = String(Math.floor(ms % 864e5 / 36e5)).padStart(2,'0'); $('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2,'0'); }
+  tick(); setInterval(tick, 30000);
+})();
+</script>
