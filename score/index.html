@@ -112,8 +112,8 @@
 
   <!-- 3. Locked -->
   <section class="card locked" id="done" hidden>
-    <div class="k">Card submitted</div>
-    <h1>Your card is <b>in.</b></h1>
+    <div class="k">Votes submitted</div>
+    <h1>Your votes are <b>in.</b></h1>
     <p id="doneMsg">The key gets unsealed on stage at 10 PM. If every one of your calls is right, you passed the test. Nobody ever has.</p>
     <p class="k">Keep your ticket. You will need it to claim the vault.</p>
     <button class="btn" type="button" id="doneOut" hidden style="margin-top:10px">Finished voting · Exit</button>
@@ -148,7 +148,7 @@
   <div class="in">
     <div class="st" id="st">Saved</div>
     <button class="btn ghost" id="outBtn" type="button" hidden>Finished voting · Exit</button>
-    <button class="btn" id="submitBtn" type="button" disabled>Submit card</button>
+    <button class="btn" id="submitBtn" type="button" disabled>Submit votes</button>
   </div>
 </div>
 
@@ -256,7 +256,7 @@ function progress(){
   var total = state.config.entries.length; var done = state.config.entries.filter(function(en){ var v = state.votes[en.n]; return v && v.flavor && v.method; }).length;
   $('prog').textContent = done + ' / ' + total; $('bar').style.width = (total ? done/total*100 : 0) + '%';
   $('submitBtn').disabled = done < total;
-  $('submitBtn').textContent = done < total ? ('Submit card (' + (total-done) + ' left)') : 'Submit card';
+  $('submitBtn').textContent = done < total ? ('Submit votes (' + (total-done) + ' left)') : 'Submit votes';
 }
 var saving = {};
 async function save(n){
@@ -275,7 +275,7 @@ setInterval(flush, 8000); window.addEventListener('online', flush);
 function setStatus(t, bad){ $('st').textContent = t; $('st').className = 'st' + (bad ? ' off' : ''); }
 
 $('submitBtn').addEventListener('click', async function(){
-  if (!confirm('Submit your card? You cannot change it after this.')) return;
+  if (!confirm('Submit your votes? You cannot change them after this.')) return;
   await flush();
   var r = await api('submit', {code:state.code}, 'POST');
   if (!r.ok){ alert(r.error || 'Could not submit. Find a floor lead.'); return; }
@@ -329,7 +329,7 @@ $('tallyBtn').addEventListener('click', async function(){
   var judges = Object.values(byJudge).map(function(j){ j.submitted = !!(r.cards && r.cards[j.code]); j.passed = keyed === total && j.submitted && j.calls === total && j.right === total; return j; }).sort(function(a,b){ return b.right - a.right; });
   var h = '<p class="k">Entries by flavor (avg) · ' + r.votes.length + ' votes · key set for ' + keyed + ' of ' + total + '</p><table><tr><th>#</th><th>Avg</th><th>Votes</th><th>Resin / Rosin calls</th><th>Key</th></tr>' +
     entries.map(function(e){ return '<tr class="tally-row"><td><b>#' + e.n + '</b></td><td>' + (e.sum/e.c).toFixed(2) + '</td><td>' + e.c + '</td><td>' + e.resin + ' / ' + e.rosin + '</td><td>' + (key[e.n]||'') + '</td></tr>'; }).join('') + '</table>' +
-    '<p class="k" style="margin-top:14px">Judges · perfect method run = passed</p><table><tr><th>Judge</th><th>Right</th><th>Card</th><th></th></tr>' +
+    '<p class="k" style="margin-top:14px">Judges · perfect method run = passed</p><table><tr><th>Judge</th><th>Right</th><th>Votes</th><th></th></tr>' +
     judges.map(function(j){ return '<tr><td>' + j.code + '</td><td>' + j.right + ' / ' + j.calls + '</td><td>' + (j.submitted ? 'in' : 'open') + '</td><td>' + (j.passed ? '<span class="pass">PASSED</span>' : (keyed<total ? 'set full key' : '')) + '</td></tr>'; }).join('') + '</table>';
   $('tally').innerHTML = h;
 });
@@ -343,7 +343,7 @@ $('tallyBtn').addEventListener('click', async function(){
     Object.keys(DEMO_TICKETS).forEach(function(c){ var t2 = DEMO_TICKETS[c]; $('demoCodes').insertAdjacentHTML('beforeend', '<div><a href="?t=' + c + (KIOSK ? '&kiosk=1' : '') + '">' + c + '</a> · ' + t2.name + ' · ' + t2.day + ' pass</div>'); });
   }
   $('adminBox').hidden = !KIOSK ? false : true;
-  if (KIOSK){ $('kioskScan').hidden = false; $('outBtn').hidden = false; document.querySelector('#gate p').textContent = 'Voting station. Enter the judge code from your ticket email, or scan your ticket QR, and your card comes up. Tap Finished voting when you are done so the next judge can use this iPad.'; }
+  if (KIOSK){ $('kioskScan').hidden = false; $('outBtn').hidden = false; document.querySelector('#gate p').textContent = 'Voting station. Enter the judge code from your ticket email, or scan your ticket QR, and your votes come up. Tap Finished voting when you are done so the next judge can use this iPad.'; }
   if (t){ $('code').value = fmt(t); signIn(t); }
   else if (!KIOSK) { try { var last = localStorage.getItem('hbtt_sc_code'); if (last){ $('code').value = last; } } catch(e){} }
   function net(){ if (!navigator.onLine) setStatus('Offline · will retry', true); }
