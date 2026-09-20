@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hitman Blind Taste Test Colorado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
   /* The Reserve site tokens (styles-sx62olh5.css) with the event's own accent for the hero */
   :root{
@@ -252,6 +252,55 @@
   @media (prefers-reduced-motion:reduce){
     *{transition:none !important}
   }
+
+  /* ---- Hitman dark theme, matches the sponsor rate card ---- */
+  :root{--cream:#17120D;--paper:#1f1913;--sand:#221c15;--surface-raised:#1f1913;--ink:#F1EADB;--ink-dark:#17120D;--ink-light:#DDD3C2;--ink-secondary:#B5A894;--sage:#4a3f31;--sage-text:#B5A894;--sage-deep:#7a6a4f;--terracotta:#E9A93F;--terracotta-text:#E9A93F;--rule-gold:rgba(233,169,63,.35);--amber:#E9A93F;--hero-muted:#B5A894;--hero-rule:#4a3f31;--font-display:"IBM Plex Mono",Menlo,monospace;--font-ui:"IBM Plex Mono",Menlo,monospace}
+  html{color-scheme:dark}
+  body{font-size:15px;line-height:1.55}
+  h1,h2,h3,.head h2,.card h3,.pass .name,.summary h3,.receipt h3,.hotel b{font-family:var(--font-wordmark);font-weight:400;text-transform:uppercase;letter-spacing:.02em}
+  .head h2 .swash{font-style:normal;color:var(--amber)}
+  .lede,.prose{font-size:15px;line-height:1.7}
+  .hero{color:var(--ink)}
+  .hero-top{border-top-color:var(--ink);color:var(--hero-muted)}
+  .wordmark .l3{color:var(--amber)}
+  .thesis p.big{font-family:var(--font-wordmark);text-transform:uppercase;font-size:clamp(26px,3.2vw,38px);line-height:1.05;letter-spacing:.02em;max-width:26ch}
+  .thesis p.big em{font-style:normal;color:var(--amber)}
+  .btn{background:var(--amber);border-color:var(--amber);color:var(--ink-dark);border-radius:0}
+  .btn:hover{background:#edb25c;border-color:#edb25c}
+  .btn-ghost-cream,.btn-ghost{background:transparent;color:var(--amber);border:1px solid var(--amber)}
+  .btn-ghost-cream:hover,.btn-ghost:hover{background:rgba(233,169,63,.12);border-color:var(--amber)}
+  .card,.pass,.hotel,.summary,.receipt{border-radius:0;box-shadow:none;background:var(--paper);border-color:var(--sage);color:var(--ink)}
+  .card p,.pass .sub,.covers p,.getting div,.stay p{color:var(--ink-light)}
+  .card.dark{background:var(--paper);border-color:var(--amber);color:var(--ink)}
+  .card.dark p{color:var(--ink-light)}
+  .pass.on,.pass.selected{border-color:var(--amber);box-shadow:none}
+  .summary{border:2px solid var(--amber)}
+  .stepper button{color:var(--ink);border-color:var(--sage);border-radius:0}
+  .stepper button:hover{border-color:var(--amber)}
+  .stepper b{color:var(--ink)}
+  .summary .fine b{color:var(--ink)}
+  .buyer input,.pass .names input{background:#221c15;color:var(--ink);border:1px solid var(--sage);border-radius:0;font-family:var(--font-ui);font-size:14px}
+  .buyer input:focus,.pass .names input:focus{outline:2px solid var(--amber);border-color:var(--amber)}
+  .paypal-wrap{border-radius:0}
+  .receipt{border-color:var(--amber)}
+  .receipt .tk{background:#fff;color:#17120D;border-radius:0;border-color:#fff}
+  .toast{background:var(--paper);color:var(--ink);border:1px solid var(--amber);border-radius:0}
+  .site-head{background:rgba(23,18,13,.94);border-bottom-color:var(--sage)}
+  .site-head .logo,.site-head .back,.site-head .cart{color:var(--ink)}
+  .cart .count{background:var(--amber);color:var(--ink-dark)}
+  section.block + section.block{border-top-color:var(--sage)}
+  .eyebrow{color:var(--amber)}
+  .gold-rule{background:var(--amber);opacity:1}
+  .lines .ln{border-bottom-color:var(--sage)}
+  .hotel:hover{border-color:var(--amber)}
+  /* the ballot in the hero, same as the sponsor page */
+  .call{border:3px solid var(--amber);padding:22px 26px;gap:34px;align-items:center}
+  .call .opt{font-family:var(--font-wordmark);font-size:40px;letter-spacing:.04em;text-transform:uppercase;line-height:1;color:var(--ink);gap:14px;font-weight:400}
+  .call .box{width:34px;height:34px;border:4px solid var(--amber);flex:none}
+  .call .box svg{display:block;width:100%;height:100%;fill:none;stroke:var(--amber);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(1.18);transition:opacity .25s}
+  .call .box.on svg{opacity:1}
+  .call .ask{font-family:var(--font-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:600;text-align:right;line-height:1.6;max-width:28ch}
+  @media (max-width:600px){.call{padding:16px 18px;gap:18px}.call .opt{font-size:28px}.call .box{width:26px;height:26px;border-width:3px}.call .ask{text-align:left;max-width:none;margin-left:0}}
 </style>
 
 <header class="site-head">
@@ -284,8 +333,8 @@
       </h1>
 
       <div class="call" role="group" aria-label="Live resin or live rosin, is your palate discerning enough to tell the difference">
-        <span class="opt"><span class="box" aria-hidden="true"></span>Live Resin</span>
-        <span class="opt"><span class="box" aria-hidden="true"></span>Live Rosin</span>
+        <span class="opt"><span class="box on" id="hbox-resin" aria-hidden="true"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M6 5.5 C 12 12, 20 21, 28.5 28.5"/><path d="M28 6 C 21 12, 13 20.5, 5.5 28"/></svg></span>Live Resin</span>
+        <span class="opt"><span class="box" id="hbox-rosin" aria-hidden="true"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M6 5.5 C 12 12, 20 21, 28.5 28.5"/><path d="M28 6 C 21 12, 13 20.5, 5.5 28"/></svg></span>Live Rosin</span>
         <span class="ask">Is your palate discerning enough to tell the difference?</span>
       </div>
 
@@ -758,4 +807,7 @@
   function tick(){ var ms = Math.max(0, doors - Date.now()); $('cd-d').textContent = String(Math.floor(ms / 864e5)).padStart(2,'0'); $('cd-h').textContent = String(Math.floor(ms % 864e5 / 36e5)).padStart(2,'0'); $('cd-m').textContent = String(Math.floor(ms % 36e5 / 6e4)).padStart(2,'0'); }
   tick(); setInterval(tick, 30000);
 })();
+</script>
+<script>
+(function(){var a=document.getElementById('hbox-resin'),b=document.getElementById('hbox-rosin');if(!a||!b)return;if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var on=true;setInterval(function(){on=!on;a.classList.toggle('on',on);b.classList.toggle('on',!on);},2500);})();
 </script>
