@@ -286,7 +286,7 @@ function signOut(){ state.code = null; state.ticket = null; state.votes = {}; st
 var idleT;
 function kioskIdle(ms){ clearTimeout(idleT); if (KIOSK) idleT = setTimeout(function(){ if (state.code) signOut(); }, ms || 120000); }
 if (KIOSK){ ['click','touchstart','input','scroll'].forEach(function(ev){ document.addEventListener(ev, function(){ if (state.code && !state.submitted) kioskIdle(120000); }, {passive:true}); }); }
-$('outBtn').addEventListener('click', function(){ if (confirm('Exit? Your scores are saved. Enter your code on any iPad or your phone to keep going.')) signOut(); });
+$('outBtn').addEventListener('click', function(){ if (confirm('Exit? Your scores are saved. Enter your code on the iPad or your phone to keep going.')) signOut(); });
 $('doneOut').addEventListener('click', signOut);
 $('scanBtn').addEventListener('click', function(){
   var b = $('scanBtn'); b.disabled = true; b.textContent = 'Starting camera…';
