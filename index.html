@@ -505,7 +505,7 @@
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-VIP">
-            <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div><div class="sub">Includes a QCB flat top banger, a Hitman bag and more · plus sales tax</div></div>
+            <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div><div class="sub">Includes a QCB flat top banger, a Hitman bag and more</div></div>
             <div class="price">$200<small>per ticket</small></div>
             <div class="left"><i></i><span class="left-txt">Only 20 VIP tickets · 20 left</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
@@ -538,7 +538,7 @@
           </form>
           <div class="total"><span>Total</span><b id="total">$0</b></div>
           <div class="paypal-wrap" id="paypal-wrap"><div id="paypal-buttons"></div><p class="pay-hint">PayPal or any card. No PayPal account needed.</p></div>
-          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. 100 testing passes per day, 20 VIP preparty tickets. Max 10 passes per day per order. VIP tickets carry Denver sales tax because they include goods. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
+          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. 100 testing passes per day, 20 VIP preparty tickets. Max 10 passes per day per order. Denver sales tax is added at checkout. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
         </aside>
       </div>
 
@@ -654,13 +654,13 @@
   var C = window.HBTT || {};
   var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
   var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
-  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:200,cap:20,max:4,named:true,tax:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true} };
+  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true,tax:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true,tax:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:200,cap:20,max:4,named:true,tax:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true,tax:true} };
   var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
   var cart = {}, names = {}, sold = {};
   var $ = function(id){ return document.getElementById(id); };
   function money(n){ return '$' + n.toLocaleString('en-US'); }
   function money2(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-  var TAX_RATE = 0.0915, TAX_LABEL = 'Denver sales tax';  // state 2.9 + Denver 5.15 + RTD 1.0 + SCFD 0.1, on tickets that include goods (VIP)
+  var TAX_RATE = 0.0915, TAX_LABEL = 'Denver sales tax';  // state 2.9 + Denver 5.15 + RTD 1.0 + SCFD 0.1, charged on every ticket
   try { var sv = JSON.parse(localStorage.getItem(KEY) || '{}'); cart = sv.cart || {}; names = sv.names || {}; } catch(e){}
   function save(){ try { localStorage.setItem(KEY, JSON.stringify({cart:cart, names:names})); } catch(e){} }
   function left(sku){ var c = CAT[sku]; return Math.max(0, c.cap - (sold[sku] || 0)); }
@@ -692,7 +692,7 @@
     });
     var ls = lines(), html = '';
     ls.forEach(function(l){ html += '<div class="ln"><span>' + l.qty + ' × ' + l.name + '</span><b>' + money(l.price * l.qty) + '</b></div>'; });
-    if (tax() > 0) html += '<div class="ln"><span>Subtotal</span><b>' + money(subtotal()) + '</b></div><div class="ln tax"><span>' + TAX_LABEL + ' (' + (TAX_RATE * 100).toFixed(2).replace(/\.?0+$/, '') + '% on VIP)</span><b>' + money2(tax()) + '</b></div>';
+    if (tax() > 0) html += '<div class="ln"><span>Subtotal</span><b>' + money(subtotal()) + '</b></div><div class="ln tax"><span>' + TAX_LABEL + ' (' + (TAX_RATE * 100).toFixed(2).replace(/\.?0+$/, '') + ')</span><b>' + money2(tax()) + '</b></div>';
     $('lines').innerHTML = html || '<p class="empty">Pick your passes on the left.</p>';
     $('total').textContent = tax() > 0 ? money2(total()) : money(total());
     var n = ls.reduce(function(a,l){ return a + l.qty; }, 0);
