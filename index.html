@@ -171,6 +171,10 @@
   .receipt{margin-top:44px;background:var(--surface-raised);border:2px solid var(--amber);border-radius:.5rem;padding:32px}
   .receipt h3{font-size:34px;line-height:1.05;margin-top:8px}
   .receipt p{margin-top:12px;color:var(--ink-light)}
+  .buyer .agree{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:12.5px;line-height:1.5;color:var(--hero-muted)}
+  .buyer .agree input{margin:3px 0 0;width:16px;height:16px;flex:0 0 auto;accent-color:var(--amber)}
+  .buyer .agree a{color:var(--amber)}
+  .buyer .agree.bad{color:#ff8a65}
   .receipt .tix{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
   .receipt .tk{background:#fff;border:1px solid var(--sage);border-radius:.5rem;padding:18px;text-align:center}
   .receipt .tk .t{font-family:var(--font-ui);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-text)}
@@ -543,7 +547,8 @@
             <label>Your name<input type="text" name="name" required autocomplete="name"></label>
             <label>Email address<input type="email" name="email" required autocomplete="email" inputmode="email"></label>
             <label>Phone<input type="tel" name="phone" required autocomplete="tel" inputmode="tel"></label>
-            <p class="buyer-err" id="buyer-err" hidden>Name, email and phone, and a name on every testing pass, before you pay.</p>
+            <label class="agree"><input type="checkbox" name="agree" value="1"><span>I am 21 or older and I agree to the <a href="terms/" target="_blank" rel="noopener">ticket terms</a> and The Reserve's <a href="https://reservethereserve.com/terms" target="_blank" rel="noopener">Terms of Service</a> and <a href="https://reservethereserve.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>. Private event, ID must match the name on the ticket, all sales final.</span></label>
+            <p class="buyer-err" id="buyer-err" hidden>Name, email and phone, a name on every ticket, and the terms box checked before you pay.</p>
           </form>
           <div class="total"><span>Total</span><b id="total">$0</b></div>
           <div class="paypal-wrap" id="paypal-wrap"><div id="paypal-buttons"></div><p class="pay-hint">PayPal or any card. No PayPal account needed.</p></div>
@@ -669,6 +674,7 @@
   var $ = function(id){ return document.getElementById(id); };
   function money(n){ return '$' + n.toLocaleString('en-US'); }
   function money2(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  var TERMS_VERSION = '2026-09-21';  // bump when the ticket terms change; stored on every order
   var TAX_RATE = 0.0915, TAX_LABEL = 'Denver sales tax';  // state 2.9 + Denver 5.15 + RTD 1.0 + SCFD 0.1, charged on every ticket
   try { var sv = JSON.parse(localStorage.getItem(KEY) || '{}'); cart = sv.cart || {}; names = sv.names || {}; } catch(e){}
   function save(){ try { localStorage.setItem(KEY, JSON.stringify({cart:cart, names:names})); } catch(e){} }
@@ -734,6 +740,7 @@
       f.elements[k].classList.toggle('bad', bad); if (bad) ok = false;
     });
     document.querySelectorAll('.pass .names input').forEach(function(i){ var bad = !i.value.trim(); i.classList.toggle('bad', bad); if (bad) ok = false; });
+    var ag = f.elements.agree; var agBad = !(ag && ag.checked); f.querySelector('.agree').classList.toggle('bad', agBad); if (agBad) ok = false;
     $('buyer-err').hidden = ok;
     if (!ok) { var first = document.querySelector('.bad'); if (first) first.scrollIntoView({behavior:'smooth', block:'center'}); }
     return ok;
@@ -782,7 +789,7 @@
           var cap0 = d.purchase_units && d.purchase_units[0].payments && d.purchase_units[0].payments.captures && d.purchase_units[0].payments.captures[0];
           var id = (cap0 && cap0.id) || d.id;
           var ln = {}; ls.forEach(function(l){ ln[l.sku] = l.qty; });
-          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), subtotal:subtotal().toFixed(2), tax:tax().toFixed(2), taxRate:TAX_RATE, payerEmail:(d.payer && d.payer.email_address) || '', payerName:(d.payer && d.payer.name ? [d.payer.name.given_name, d.payer.name.surname].filter(Boolean).join(' ') : ''), payerId:(d.payer && d.payer.payer_id) || '', sandbox:SANDBOX };
+          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), subtotal:subtotal().toFixed(2), tax:tax().toFixed(2), taxRate:TAX_RATE, agreedAt:new Date().toISOString(), termsVersion:TERMS_VERSION, payerEmail:(d.payer && d.payer.email_address) || '', payerName:(d.payer && d.payer.name ? [d.payer.name.given_name, d.payer.name.surname].filter(Boolean).join(' ') : ''), payerId:(d.payer && d.payer.payer_id) || '', sandbox:SANDBOX };
           fetch(BACKEND + '/api/order', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), keepalive:true }).catch(function(){});
           ls.forEach(function(l){ sold[l.sku] = (sold[l.sku] || 0) + l.qty; });
           cart = {}; names = {}; save(); render();
