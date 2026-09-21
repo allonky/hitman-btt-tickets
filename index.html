@@ -498,21 +498,21 @@
           <div class="pass" data-sku="HBTT-TK-VIP">
             <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div></div>
             <div class="price">$100<small>per ticket</small></div>
-            <div class="left"><i></i><span class="left-txt">20 of 20 remaining</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 20 VIP tickets · 20 left</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-SAT">
             <div><div class="name">Saturday Testing Pass</div><div class="sub">Sat Oct 10 · Day One · The Reserve · doors 12 PM</div></div>
             <div class="price">$200<small>per pass</small></div>
-            <div class="left"><i></i><span class="left-txt">100 of 100 remaining</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 100 passes for the day · 100 left</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Saturday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Saturday pass">+</button><span class="lbl">passes</span></div>
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-SUN">
             <div><div class="name">Sunday Testing Pass</div><div class="sub">Sun Oct 11 · Day Two · The Reserve · doors 12 PM</div></div>
             <div class="price">$200<small>per pass</small></div>
-            <div class="left"><i></i><span class="left-txt">100 of 100 remaining</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 100 passes for the day · 100 left</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Sunday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Sunday pass">+</button><span class="lbl">passes</span></div>
             <div class="names"></div>
           </div>
@@ -529,7 +529,7 @@
           </form>
           <div class="total"><span>Total</span><b id="total">$0</b></div>
           <div class="paypal-wrap" id="paypal-wrap"><div id="paypal-buttons"></div><p class="pay-hint">PayPal or any card. No PayPal account needed.</p></div>
-          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. Max 4 passes per day per order. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
+          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. 100 testing passes per day, 20 VIP preparty tickets. Max 10 passes per day per order. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
         </aside>
       </div>
 
@@ -673,7 +673,7 @@
   var C = window.HBTT || {};
   var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
   var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
-  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:4,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:4,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:100,cap:20,max:4,named:false}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:false} };
+  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:100,cap:20,max:4,named:false}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:false} };
   var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
   var cart = {}, names = {}, sold = {};
   var $ = function(id){ return document.getElementById(id); };
@@ -691,7 +691,7 @@
       p.querySelector('.stepper b').textContent = q;
       p.classList.toggle('on', q > 0);
       var out = l <= 0; p.classList.toggle('sold', out);
-      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (l + ' of ' + c.cap + ' remaining'));
+      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (sku === 'HBTT-TK-VIP' ? ('Only ' + c.cap + ' VIP tickets · ' + l + ' left') : ('Only ' + c.cap + ' passes for the day · ' + l + ' left')));
       p.querySelector('[data-inc]').disabled = q >= cap(sku);
       p.querySelector('[data-dec]').disabled = q <= 0;
       var box = p.querySelector('.names'); var want = c.named ? q : 0;
