@@ -649,7 +649,7 @@
   var C = window.HBTT || {};
   var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
   var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
-  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:100,cap:20,max:4,named:false}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:false} };
+  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:100,cap:20,max:4,named:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true} };
   var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
   var cart = {}, names = {}, sold = {};
   var $ = function(id){ return document.getElementById(id); };
@@ -674,7 +674,8 @@
       while (box.children.length > want) box.lastChild.remove();
       while (box.children.length < want) {
         var i = box.children.length, lab = document.createElement('label');
-        lab.innerHTML = 'Name on pass ' + (i + 1) + '<input type="text" autocomplete="off" data-sku="' + sku + '" data-i="' + i + '" placeholder="Who is taking the test">';
+        var unit = /^HBTT-TK-(SAT|SUN)$/.test(sku) ? 'pass' : 'ticket', ph = unit === 'pass' ? 'Who is taking the test' : 'Who is coming, as it reads on their ID';
+        lab.innerHTML = 'Name on ' + unit + ' ' + (i + 1) + '<input type="text" autocomplete="off" data-sku="' + sku + '" data-i="' + i + '" placeholder="' + ph + '">';
         lab.querySelector('input').value = (names[sku] && names[sku][i]) || '';
         box.appendChild(lab);
       }
