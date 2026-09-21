@@ -692,7 +692,7 @@
     });
     var ls = lines(), html = '';
     ls.forEach(function(l){ html += '<div class="ln"><span>' + l.qty + ' × ' + l.name + '</span><b>' + money(l.price * l.qty) + '</b></div>'; });
-    if (tax() > 0) html += '<div class="ln"><span>Subtotal</span><b>' + money(subtotal()) + '</b></div><div class="ln tax"><span>' + TAX_LABEL + ' (' + (TAX_RATE * 100).toFixed(2).replace(/\.?0+$/, '') + ')</span><b>' + money2(tax()) + '</b></div>';
+    if (tax() > 0) html += '<div class="ln"><span>Subtotal</span><b>' + money(subtotal()) + '</b></div><div class="ln tax"><span>' + TAX_LABEL + ' (' + (TAX_RATE * 100).toFixed(2).replace(/\.?0+$/, '') + '%)</span><b>' + money2(tax()) + '</b></div>';
     $('lines').innerHTML = html || '<p class="empty">Pick your passes on the left.</p>';
     $('total').textContent = tax() > 0 ? money2(total()) : money(total());
     var n = ls.reduce(function(a,l){ return a + l.qty; }, 0);
