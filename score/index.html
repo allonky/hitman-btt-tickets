@@ -88,7 +88,7 @@
     <h1>Your code is on <b>your ticket</b></h1>
     <p>Type the judge code printed under the QR on your ticket, or open the link from your ticket email.</p>
     <form id="gateForm">
-      <input type="text" id="code" placeholder="HBTT-XXXX-XXXX" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="14" aria-label="Judge code">
+      <input type="text" id="code" placeholder="HBTT-SAT-XXXX" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="14" aria-label="Judge code">
       <div class="err" id="gateErr" hidden></div>
       <div style="height:10px"></div>
       <button class="btn" type="submit" id="gateBtn">Start scoring</button>
@@ -201,7 +201,7 @@ function demoApi(action, p){
 }
 
 /* ---------- sign in ---------- */
-function fmt(v){ var r = v.toUpperCase().replace(/[^A-Z0-9]/g,''); if (r.length<=4) return r; if (r.length<=8) return r.slice(0,4)+'-'+r.slice(4); return r.slice(0,4)+'-'+r.slice(4,8)+'-'+r.slice(8,12); }
+function fmt(v){ var r = v.toUpperCase().replace(/[^A-Z0-9]/g,''); if (r.length<=4) return r; var m = r.match(/^HBTT(SAT|SUN|VIP|TEST|GA)(.*)$/); if (m) return 'HBTT-'+m[1]+(m[2]?'-'+m[2].slice(0,4):''); if (r.length<=8) return r.slice(0,4)+'-'+r.slice(4); return r.slice(0,4)+'-'+r.slice(4,8)+'-'+r.slice(8,12); }
 $('code').addEventListener('input', function(e){ e.target.value = fmt(e.target.value); });
 $('gateForm').addEventListener('submit', function(e){ e.preventDefault(); signIn($('code').value); });
 
