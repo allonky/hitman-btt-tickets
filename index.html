@@ -433,7 +433,7 @@
           <div class="when"><b>Fri Oct 09</b><span>6 PM</span></div>
           <div>
             <h3>The Preparty</h3>
-            <div class="where">Explore Glass Gallery · Denver · GA $20 · VIP $100, 20 only</div>
+            <div class="where">Explore Glass Gallery · Denver · GA $20 · VIP $200, 20 only</div>
             <p>Separate ticket, separate room. Glass show, welcome mic with Dougie and the tour crew. Pass holders can check in early, grab their wristband and merch, and skip the Saturday line. Address goes out by email after you buy.</p>
           </div>
         </article>
@@ -487,7 +487,7 @@
         <h2>Testing <span class="swash">passes.</span></h2>
         <div class="gold-rule"></div>
       </div>
-      <p class="lede">$200 to take the test on Saturday. $200 to take the test on Sunday. Separate passes. 100 judge passes per day only, buy both if you want both. The preparty is its own ticket, $20 GA or $100 VIP. Presale only, nothing is sold at the door. Your name goes on the ticket and your ID gets you in.</p>
+      <p class="lede">$200 to take the test on Saturday. $200 to take the test on Sunday. Separate passes. 100 judge passes per day only, buy both if you want both. The preparty is its own ticket, $20 GA or $200 VIP. VIP includes a QCB flat top banger, a Hitman bag and more, 20 only. Presale only, nothing is sold at the door. Your name goes on the ticket and your ID gets you in.</p>
 
       <div class="ticket-grid" id="eventTickets">
         <div class="passes" id="passes">
@@ -499,8 +499,8 @@
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-VIP">
-            <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div></div>
-            <div class="price">$100<small>per ticket</small></div>
+            <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div><div class="sub">Includes a QCB flat top banger, a Hitman bag and more</div></div>
+            <div class="price">$200<small>per ticket</small></div>
             <div class="left"><i></i><span class="left-txt">Only 20 VIP tickets · 20 left</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
             <div class="names"></div>
@@ -612,7 +612,7 @@
         <li><b>Passing the test.</b> Every resin or rosin vote you cast correct. If more than one judge passes, the vault is valued at MSRP and split equally between the passers.</li>
         <li><b>Capacity.</b> The building holds 150. Ten stations keep the lines short. Live door count all day.</li>
         <li><b>Consumption.</b> Indoors only. Never on a balcony or at a window. Hardware is at the stations. Torches only in the marked zone.</li>
-        <li><b>Preparty.</b> Friday Oct 9 at Explore Glass Gallery is its own ticket, $20 GA or $100 VIP with 20 VIP total. 21+. Address emailed after purchase.</li>
+        <li><b>Preparty.</b> Friday Oct 9 at Explore Glass Gallery is its own ticket, $20 GA or $200 VIP with 20 VIP total. VIP includes a QCB flat top banger, a Hitman bag and more. 21+. Address emailed after purchase.</li>
         <li><b>Dry event.</b> The bar runs NA all weekend.</li>
         <li><b>Security.</b> House security is on site all weekend. Follow staff direction.</li>
         <li><b>Questions.</b> blindtastetest@reservethereserve.com</li>
@@ -648,7 +648,7 @@
   var C = window.HBTT || {};
   var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
   var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
-  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:100,cap:20,max:4,named:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true} };
+  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:200,cap:20,max:4,named:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true} };
   var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
   var cart = {}, names = {}, sold = {};
   var $ = function(id){ return document.getElementById(id); };
