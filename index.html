@@ -785,7 +785,7 @@
           var cap0 = d.purchase_units && d.purchase_units[0].payments && d.purchase_units[0].payments.captures && d.purchase_units[0].payments.captures[0];
           var id = (cap0 && cap0.id) || d.id;
           var ln = {}; ls.forEach(function(l){ ln[l.sku] = l.qty; });
-          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), payerEmail:(d.payer && d.payer.email_address) || '', sandbox:SANDBOX };
+          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), payerEmail:(d.payer && d.payer.email_address) || '', payerName:(d.payer && d.payer.name ? [d.payer.name.given_name, d.payer.name.surname].filter(Boolean).join(' ') : ''), payerId:(d.payer && d.payer.payer_id) || '', sandbox:SANDBOX };
           fetch(BACKEND + '/api/order', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), keepalive:true }).catch(function(){});
           ls.forEach(function(l){ sold[l.sku] = (sold[l.sku] || 0) + l.qty; });
           cart = {}; names = {}; save(); render();
