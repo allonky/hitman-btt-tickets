@@ -505,7 +505,7 @@
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-VIP">
-            <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div><div class="sub">Includes a QCB flat top banger, a Hitman bag and more</div></div>
+            <div><div class="name">Friday Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, not The Reserve · doors 6 PM</div><div class="sub">Includes a QCB flat top banger, a Hitman bag and more · plus sales tax</div></div>
             <div class="price">$200<small>per ticket</small></div>
             <div class="left"><i></i><span class="left-txt">Only 20 VIP tickets · 20 left</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
@@ -538,7 +538,7 @@
           </form>
           <div class="total"><span>Total</span><b id="total">$0</b></div>
           <div class="paypal-wrap" id="paypal-wrap"><div id="paypal-buttons"></div><p class="pay-hint">PayPal or any card. No PayPal account needed.</p></div>
-          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. 100 testing passes per day, 20 VIP preparty tickets. Max 10 passes per day per order. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
+          <p class="fine"><b>Presale only.</b> No door sales. 21+ with ID matching the name on the pass. 100 testing passes per day, 20 VIP preparty tickets. Max 10 passes per day per order. VIP tickets carry Denver sales tax because they include goods. Transfers by name change until Oct 7. No refunds. Tickets arrive by email the minute you pay.</p>
         </aside>
       </div>
 
@@ -654,17 +654,22 @@
   var C = window.HBTT || {};
   var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
   var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
-  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:200,cap:20,max:4,named:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true} };
+  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-SUN':{name:'Sunday Testing Pass',price:200,cap:100,max:10,named:true}, 'HBTT-TK-VIP':{name:'Preparty VIP',price:200,cap:20,max:4,named:true,tax:true}, 'HBTT-TK-GA':{name:'Preparty GA',price:20,cap:150,max:6,named:true} };
   var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
   var cart = {}, names = {}, sold = {};
   var $ = function(id){ return document.getElementById(id); };
   function money(n){ return '$' + n.toLocaleString('en-US'); }
+  function money2(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  var TAX_RATE = 0.0915, TAX_LABEL = 'Denver sales tax';  // state 2.9 + Denver 5.15 + RTD 1.0 + SCFD 0.1, on tickets that include goods (VIP)
   try { var sv = JSON.parse(localStorage.getItem(KEY) || '{}'); cart = sv.cart || {}; names = sv.names || {}; } catch(e){}
   function save(){ try { localStorage.setItem(KEY, JSON.stringify({cart:cart, names:names})); } catch(e){} }
   function left(sku){ var c = CAT[sku]; return Math.max(0, c.cap - (sold[sku] || 0)); }
   function cap(sku){ return Math.min(CAT[sku].max, left(sku)); }
   function lines(){ return Object.keys(cart).filter(function(k){ return cart[k] > 0; }).map(function(k){ return {sku:k, name:CAT[k].name, price:CAT[k].price, qty:cart[k]}; }); }
-  function total(){ return lines().reduce(function(a,l){ return a + l.price * l.qty; }, 0); }
+  function subtotal(){ return lines().reduce(function(a,l){ return a + l.price * l.qty; }, 0); }
+  function taxable(){ return lines().filter(function(l){ return CAT[l.sku].tax; }).reduce(function(a,l){ return a + l.price * l.qty; }, 0); }
+  function tax(){ return Math.round(taxable() * TAX_RATE * 100) / 100; }
+  function total(){ return Math.round((subtotal() + tax()) * 100) / 100; }
 
   function render(){
     document.querySelectorAll('.pass').forEach(function(p){
@@ -687,8 +692,9 @@
     });
     var ls = lines(), html = '';
     ls.forEach(function(l){ html += '<div class="ln"><span>' + l.qty + ' × ' + l.name + '</span><b>' + money(l.price * l.qty) + '</b></div>'; });
+    if (tax() > 0) html += '<div class="ln"><span>Subtotal</span><b>' + money(subtotal()) + '</b></div><div class="ln tax"><span>' + TAX_LABEL + ' (' + (TAX_RATE * 100).toFixed(2).replace(/\.?0+$/, '') + '% on VIP)</span><b>' + money2(tax()) + '</b></div>';
     $('lines').innerHTML = html || '<p class="empty">Pick your passes on the left.</p>';
-    $('total').textContent = money(total());
+    $('total').textContent = tax() > 0 ? money2(total()) : money(total());
     var n = ls.reduce(function(a,l){ return a + l.qty; }, 0);
     $('cartCount').textContent = n; $('cartCount').classList.toggle('on', n > 0);
     $('paypal-wrap').classList.toggle('idle', n === 0);
@@ -756,7 +762,7 @@
             description:'Hitman Blind Taste Test Colorado tickets, Oct 9 to 11, 2026',
             custom_id: ls.map(function(l){ return l.sku + ':' + l.qty; }).join(','),
             soft_descriptor:'HITMAN BTT CO',
-            amount:{ currency_code:'USD', value:tot.toFixed(2), breakdown:{ item_total:{ currency_code:'USD', value:tot.toFixed(2) } } },
+            amount:{ currency_code:'USD', value:tot.toFixed(2), breakdown:{ item_total:{ currency_code:'USD', value:subtotal().toFixed(2) }, tax_total:{ currency_code:'USD', value:tax().toFixed(2) } } },
             items: ls.map(function(l){ return { name:l.name, sku:l.sku, quantity:String(l.qty), category:'DIGITAL_GOODS', unit_amount:{ currency_code:'USD', value:l.price.toFixed(2) } }; })
           }]
         });
@@ -767,7 +773,7 @@
           var cap0 = d.purchase_units && d.purchase_units[0].payments && d.purchase_units[0].payments.captures && d.purchase_units[0].payments.captures[0];
           var id = (cap0 && cap0.id) || d.id;
           var ln = {}; ls.forEach(function(l){ ln[l.sku] = l.qty; });
-          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), payerEmail:(d.payer && d.payer.email_address) || '', payerName:(d.payer && d.payer.name ? [d.payer.name.given_name, d.payer.name.surname].filter(Boolean).join(' ') : ''), payerId:(d.payer && d.payer.payer_id) || '', sandbox:SANDBOX };
+          var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), subtotal:subtotal().toFixed(2), tax:tax().toFixed(2), taxRate:TAX_RATE, payerEmail:(d.payer && d.payer.email_address) || '', payerName:(d.payer && d.payer.name ? [d.payer.name.given_name, d.payer.name.surname].filter(Boolean).join(' ') : ''), payerId:(d.payer && d.payer.payer_id) || '', sandbox:SANDBOX };
           fetch(BACKEND + '/api/order', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), keepalive:true }).catch(function(){});
           ls.forEach(function(l){ sold[l.sku] = (sold[l.sku] || 0) + l.qty; });
           cart = {}; names = {}; save(); render();
