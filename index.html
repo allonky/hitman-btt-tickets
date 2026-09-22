@@ -63,13 +63,16 @@
   .call .opt{display:inline-flex;align-items:center;gap:10px}
   .call .box{width:.95em;height:.95em;border:3px solid var(--cream);display:inline-block}
   .call .ask{margin-left:auto;color:var(--amber);font-weight:600}
-  .thesis{margin-top:34px;display:grid;grid-template-columns:1.9fr 1fr;gap:40px;align-items:end}
+  .thesis{margin-top:34px;display:grid;grid-template-columns:1.9fr 1fr;gap:40px;align-items:center}
+  .thesis-cta{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+  .thesis-cta .btn{width:min(100%,280px)}
+  @media (max-width:640px){.thesis-cta{margin-top:24px}}
   .thesis p.big{font-size:clamp(22px,2.6vw,32px);line-height:1.25;max-width:17.2em}
   .thesis p.big em{font-style:italic;color:var(--amber)}
   .thesis .facts{font-family:var(--font-ui);font-size:13px;letter-spacing:.04em;color:var(--hero-muted);display:grid;gap:8px;border-left:1px solid var(--hero-rule);padding-left:20px}
   .thesis .facts b{color:var(--cream);font-weight:600}
-  .hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .hero-cta .price{font-family:var(--font-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--hero-muted);margin-left:6px}
+  .hero-cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-cta .price{font-family:var(--font-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--hero-muted);margin-left:0}
   .hero-cta .price b{color:var(--amber);font-weight:600}
   .countdown{margin-top:44px;border-top:1px solid var(--hero-rule);padding-top:18px;display:flex;gap:28px;flex-wrap:wrap;align-items:baseline;font-family:var(--font-ui)}
   .countdown .lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hero-muted)}
@@ -375,16 +378,13 @@
 
       <div class="thesis">
         <p class="big">Nobody has ever passed the test.<br>Pass it and win <em>$1,000+ in prizes</em> from the top companies in the industry.</p>
-        <div class="facts">
-          <div><b>Est. 2019</b> · Los Angeles</div>
-          <div><b>Perfect scores to date</b> · 0</div>
-          <div><b>You</b> are the judge</div>
+        <div class="thesis-cta">
+          <a class="btn btn-amber" href="#tickets">Get your testing pass</a>
+          <a class="btn btn-ghost-cream" href="#test">How the test works</a>
         </div>
       </div>
 
       <div class="hero-cta">
-        <a class="btn btn-amber" href="#tickets">Get your testing pass</a>
-        <a class="btn btn-ghost-cream" href="#test">How the test works</a>
         <span class="price"><b>$200 per day</b> · Sat Oct 10 · Sun Oct 11 · Presale only · Preparty from $20</span>
       </div>
 
