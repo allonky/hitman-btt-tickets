@@ -281,10 +281,11 @@
   .follow{margin-top:28px;font-family:var(--font-ui);font-size:13px;letter-spacing:.04em;color:var(--hero-muted)}
 
   /* countdown spans the page, digits scale with the viewport */
-  .countdown{justify-content:space-between;align-items:center;gap:20px 40px;padding-top:24px}
+  .countdown{justify-content:space-between;align-items:center;gap:20px 40px;margin-top:64px;padding-top:44px}
   .countdown .lbl{flex:1 1 260px;font-size:clamp(11px,1.2vw,15px)}
-  .countdown .t{flex:0 1 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,72px);min-width:min(100%,520px)}
-  .countdown .t div{align-items:flex-start}
+  .countdown .t{flex:0 1 auto;display:grid;grid-template-columns:repeat(3,auto);gap:clamp(24px,5vw,88px);min-width:min(100%,520px);justify-content:end}
+  .countdown .t div{align-items:flex-start;min-width:2ch}
+  .countdown .t b{font-variant-numeric:tabular-nums}
   .countdown .t b{font-family:var(--font-wordmark);font-weight:400;font-size:clamp(44px,7.5vw,112px);letter-spacing:.02em}
   .countdown .t span{font-size:clamp(10px,1vw,13px);margin-top:8px}
   @media (max-width:640px){.countdown .t{min-width:100%;gap:16px}.countdown .t b{font-size:clamp(48px,15vw,84px)}}
