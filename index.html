@@ -894,17 +894,34 @@
           var id = (cap0 && cap0.id) || d.id;
           var ln = {}; ls.forEach(function(l){ ln[l.sku] = l.qty; });
           var body = { captureId:id, paypalOrderId:d.id, kind:'ticket', name:b.name, email:b.email, phone:b.phone, lines:ln, attendees:attendees(), total:tot.toFixed(2), subtotal:subtotal().toFixed(2), tax:tax().toFixed(2), taxRate:TAX_RATE, agreedAt:new Date().toISOString(), termsVersion:TERMS_VERSION, payerEmail:(d.payer && d.payer.email_address) || '', payerName:(d.payer && d.payer.name ? [d.payer.name.given_name, d.payer.name.surname].filter(Boolean).join(' ') : ''), payerId:(d.payer && d.payer.payer_id) || '', sandbox:SANDBOX };
-          fetch(BACKEND + '/api/order', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), keepalive:true }).catch(function(){});
+          try { localStorage.setItem('hbtt_pending_' + id, JSON.stringify(body)); } catch(e){}
+          postOrder(body, 0);
           ls.forEach(function(l){ sold[l.sku] = (sold[l.sku] || 0) + l.qty; });
           cart = {}; names = {}; save(); render();
-          showReceipt(id, ls, b);
+          showReceipt(id, ls, b, body);
         });
       },
       onError:function(err){ nudge('Payment did not go through. Try again or email blindtastetest@reservethereserve.com.'); console.error(err); }
     }).render('#paypal-buttons');
   }
 
-  function showReceipt(id, ls, b){
+  // the buyer record must reach the backend even if the first try fails or races the PayPal webhook: retry, and re-post until the backend says the email went out
+  function postOrder(body, n){
+    return fetch(BACKEND + '/api/order', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), keepalive:true })
+      .then(function(r){ if (!r.ok) throw new Error('order ' + r.status); return r.json(); })
+      .catch(function(){ if (n < 6) setTimeout(function(){ postOrder(body, n + 1); }, 1500 * (n + 1)); });
+  }
+  // finish any order whose confirmation never got through (page closed early, network blip)
+  (function resumePending(){
+    try { Object.keys(localStorage).filter(function(k){ return k.indexOf('hbtt_pending_') === 0; }).forEach(function(k){
+      var body = JSON.parse(localStorage.getItem(k)); if (!body || !body.captureId) { localStorage.removeItem(k); return; }
+      fetch(BACKEND + '/api/order?c=' + encodeURIComponent(body.captureId) + '&t=' + Date.now(), {cache:'no-store'}).then(function(x){ return x.json(); }).then(function(j){
+        if (j.ok && j.emailed && j.named) localStorage.removeItem(k); else postOrder(body, 0);
+      }).catch(function(){});
+    }); } catch(e){}
+  })();
+
+  function showReceipt(id, ls, b, body){
     var r = $('receipt'); r.hidden = false;
     $('receipt-title').textContent = 'Thanks, ' + (b.name.split(/\s+/)[0] || '') + '. You are in.';
     $('receipt-tix').innerHTML = '<p class="wait">Issuing your ' + (ls.reduce(function(a,l){ return a + l.qty; }, 0) > 1 ? 'tickets' : 'ticket') + '. PayPal transaction ' + id + '.</p>';
@@ -912,9 +929,11 @@
     var tries = 0;
     (function poll(){
       fetch(BACKEND + '/api/order?c=' + encodeURIComponent(id) + '&t=' + Date.now(), {cache:'no-store'}).then(function(x){ return x.json(); }).then(function(j){
-        if (j.ok && j.tickets && j.tickets.length) {
+        if (j.ok && body && (!j.named || !j.emailed) && tries % 3 === 0) postOrder(body, 0);
+        if (j.ok && j.emailed && j.named) { try { localStorage.removeItem('hbtt_pending_' + id); } catch(e){} }
+        if (j.ok && j.tickets && j.tickets.length && j.named) {
           $('receipt-tix').innerHTML = j.tickets.map(function(t){
-            var sc = (t.day === 'Saturday' || t.day === 'Sunday') ? '<a href="' + C.SITE + '/score/?t=' + t.code + '">Open my scorecard</a>' : '';
+            var sc = (t.day === 'Saturday' || t.day === 'Sunday') ? '<a href="' + C.SITE + '/score/?t=' + t.code + '">Open the voting app</a>' : '';
             return '<div class="tk"><div class="t">' + t.type + '</div><div class="n">' + (t.name || b.name) + '</div><img src="' + BACKEND + '/api/qr?c=' + t.code + '" alt="' + t.code + '"><code>' + t.code + '</code>' + sc + '</div>';
           }).join('');
           $('receipt-note').textContent = (j.emailed ? 'They are also in your inbox at ' + b.email + '. ' : 'The email copy is on its way to ' + b.email + '. ') + 'Your phone is the ticket: show the QR and an ID with the same name at the door. Screenshot this.';
