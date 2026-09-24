@@ -692,21 +692,21 @@
           <div class="pass" data-sku="HBTT-TK-VIP">
             <div><div class="name">Friday QCB Preparty VIP</div><div class="sub">Fri Oct 9 · Explore Glass Gallery, 224 Santa Fe Dr, not The Reserve · doors 6 PM</div><div class="sub">Includes a QCB flat top banger, a Hitman bag and more</div></div>
             <div class="price">$200<small>per ticket</small></div>
-            <div class="left"><i></i><span class="left-txt">Only 20 VIP tickets · 20 left</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 20 VIP tickets</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-SAT">
             <div><div class="name">Saturday Testing Pass</div><div class="sub">Sat Oct 10 · Day One · The Reserve · doors 12 PM</div></div>
             <div class="price">$200<small>per pass</small></div>
-            <div class="left"><i></i><span class="left-txt">Only 100 passes for the day · 100 left</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 100 passes for the day</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Saturday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Saturday pass">+</button><span class="lbl">passes</span></div>
             <div class="names"></div>
           </div>
           <div class="pass" data-sku="HBTT-TK-SUN">
             <div><div class="name">Sunday Testing Pass</div><div class="sub">Sun Oct 11 · Day Two · The Reserve · doors 12 PM</div></div>
             <div class="price">$200<small>per pass</small></div>
-            <div class="left"><i></i><span class="left-txt">Only 100 passes for the day · 100 left</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 100 passes for the day</span></div>
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Sunday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Sunday pass">+</button><span class="lbl">passes</span></div>
             <div class="names"></div>
           </div>
@@ -819,7 +819,8 @@
       p.querySelector('.stepper b').textContent = q;
       p.classList.toggle('on', q > 0);
       var out = l <= 0; p.classList.toggle('sold', out);
-      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (sku === 'HBTT-TK-VIP' ? ('Only ' + c.cap + ' VIP tickets · ' + l + ' left') : ('Only ' + c.cap + ' passes for the day · ' + l + ' left')));
+      var low = l <= Math.max(10, Math.ceil(c.cap * 0.2));  // only say how many are left once a pass type is running low
+      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (sku === 'HBTT-TK-VIP' ? ('Only ' + c.cap + ' VIP tickets' + (low ? ' · ' + l + ' left' : '')) : ('Only ' + c.cap + ' passes for the day' + (low ? ' · ' + l + ' left' : ''))));
       p.querySelector('[data-inc]').disabled = q >= cap(sku);
       p.querySelector('[data-dec]').disabled = q <= 0;
       var box = p.querySelector('.names'); var want = c.named ? q : 0;
