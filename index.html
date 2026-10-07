@@ -438,13 +438,13 @@
       <div class="thesis">
         <p class="big">Nobody has ever passed the test.<br>Pass it and win <em>$1,000+ in prizes</em> from the top companies in the industry.</p>
         <div class="thesis-cta">
-          <a class="btn btn-amber" href="#tickets">Get your testing pass</a>
+          <a class="btn btn-amber" href="#tickets">Get your pass</a>
           <a class="btn btn-ghost-cream" href="#test">How the test works</a>
         </div>
       </div>
 
       <div class="hero-cta">
-        <span class="price"><b>$200</b> · Sat Oct 10 · Presale only · QCB Preparty from $20</span>
+        <span class="price"><b>$50</b> GA · <b>$200</b> VIP · Sat Oct 10 · Presale only · QCB Preparty from $20</span>
       </div>
 
       <div class="countdown" id="countdown">
@@ -591,7 +591,7 @@
         <h2>Two days. <span class="swash">One test.</span></h2>
         <div class="gold-rule"></div>
       </div>
-      <p class="lede">Friday night starts the weekend off at Explore Glass Gallery, tickets from $20. Saturday is the test. 100 passes, one shot at the vault.</p>
+      <p class="lede">Friday night starts the weekend off at Explore Glass Gallery, tickets from $20. Saturday is the test. 150 passes, one shot at the vault.</p>
 
       <div class="days">
         <article class="day">
@@ -647,8 +647,8 @@
       </div>
       <ul class="fine-list">
         <li><b>Private event, 21+.</b> Government ID must match the name on the order at will call. No exceptions.</li>
-        <li><b>Presale only.</b> No tickets are sold at the door by anyone. 100 judge passes only. The list closes when passes sell out or on Oct 7, whichever comes first. The address, your ticket QR code and your voting link are emailed after purchase.</li>
-        <li><b>What the pass buys.</b> Your place at the testing stations, hardware at the station, your ticket QR, the voting app on your phone, a merch item, the programming and building access for the day. Nothing else is sold on site.</li>
+        <li><b>Presale only.</b> No tickets are sold at the door by anyone. 150 passes only, 140 GA and 10 VIP. The list closes when passes sell out or on Oct 7, whichever comes first. The address, your ticket QR code and your voting link are emailed after purchase.</li>
+        <li><b>What the pass buys.</b> Your place at the testing stations, hardware at the station, your ticket QR, the voting app on your phone, the programming and building access for the day. VIP adds the gear pack. Nothing else is sold on site.</li>
         <li><b>Transfers and refunds.</b> Name changes until Oct 7. No refunds. All tickets are final at purchase.</li>
         <li><b>Passing the test.</b> You have to get every single vote correct. One wrong resin or rosin vote and you did not pass. If more than one judge passes, the vault is valued at MSRP and split equally between the passers.</li>
         <li><b>Capacity.</b> The building holds 150. Ten stations keep the lines short. Live door count all day.</li>
@@ -667,7 +667,7 @@
         <h2><span class="swash">Buy tickets.</span></h2>
         <div class="gold-rule"></div>
       </div>
-      <p class="lede">$200 to take the test on Saturday. 100 judge passes only. The QCB Preparty is its own ticket, $20 GA or $200 VIP. VIP includes a QCB flat top banger, a Hitman bag and more (only 20 VIP passes available). Presale only, nothing is sold at the door. Your name goes on the ticket and your ID gets you in.</p>
+      <p class="lede">$50 to take the test on Saturday, 140 GA passes. $200 for VIP, only 10, the same test plus the gear pack. The QCB Preparty is its own ticket, $20 GA or $200 VIP. VIP includes a QCB flat top banger, a Hitman bag and more (only 20 VIP passes available). Presale only, nothing is sold at the door. Your name goes on the ticket and your ID gets you in.</p>
       <div class="rules-line">
         <span>Presale only</span><span>No door sales</span><span>21+</span><span>Private event</span><span>Named tickets</span>
       </div>
@@ -688,11 +688,18 @@
             <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer VIP ticket">−</button><b>0</b><button type="button" data-inc aria-label="One more VIP ticket">+</button><span class="lbl">tickets</span></div>
             <div class="names"></div>
           </div>
+          <div class="pass" data-sku="HBTT-TK-SATGA">
+            <div><div class="name">Saturday GA Pass</div><div class="sub">Sat Oct 10 · The test · The Reserve · doors 12 PM</div></div>
+            <div class="price">$50<small>per pass</small></div>
+            <div class="left"><i></i><span class="left-txt">Only 140 passes</span></div>
+            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Saturday GA pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Saturday GA pass">+</button><span class="lbl">passes</span></div>
+            <div class="names"></div>
+          </div>
           <div class="pass" data-sku="HBTT-TK-SAT">
-            <div><div class="name">Saturday Testing Pass</div><div class="sub">Sat Oct 10 · The test · The Reserve · doors 12 PM</div></div>
+            <div><div class="name">Saturday VIP Pass</div><div class="sub">Sat Oct 10 · The test · The Reserve · doors 12 PM</div><div class="sub">The same test plus the gear pack</div></div>
             <div class="price">$200<small>per pass</small></div>
-            <div class="left"><i></i><span class="left-txt">Only 100 passes</span></div>
-            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Saturday pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Saturday pass">+</button><span class="lbl">passes</span></div>
+            <div class="left"><i></i><span class="left-txt">Only 10 VIP passes</span></div>
+            <div class="stepper pass-qty"><button type="button" data-dec aria-label="One fewer Saturday VIP pass">−</button><b>0</b><button type="button" data-inc aria-label="One more Saturday VIP pass">+</button><span class="lbl">passes</span></div>
             <div class="names"></div>
           </div>
         </div>
@@ -780,7 +787,7 @@
   var C = window.HBTT || {};
   var BACKEND = C.BACKEND, SANDBOX = new URLSearchParams(location.search).get('sandbox') === '1';
   var CLIENT_ID = SANDBOX ? (C.PAYPAL_SANDBOX_CLIENT_ID || 'sb') : C.PAYPAL_CLIENT_ID;
-  var CAT = { 'HBTT-TK-SAT':{name:'Saturday Testing Pass',price:200,cap:100,max:10,named:true,tax:true}, 'HBTT-TK-VIP':{name:'QCB Preparty VIP',price:200,cap:20,max:4,named:true,tax:true}, 'HBTT-TK-GA':{name:'QCB Preparty GA',price:20,cap:150,max:6,named:true,tax:true} };
+  var CAT = { 'HBTT-TK-SATGA':{name:'Saturday GA Pass',price:50,cap:140,max:10,named:true,tax:true}, 'HBTT-TK-SAT':{name:'Saturday VIP Pass',price:200,cap:10,max:4,named:true,tax:true}, 'HBTT-TK-VIP':{name:'QCB Preparty VIP',price:200,cap:20,max:4,named:true,tax:true}, 'HBTT-TK-GA':{name:'QCB Preparty GA',price:20,cap:150,max:6,named:true,tax:true} };
   var KEY = 'hbtt-ticket-cart', FK = 'hbtt-ticket-buyer';
   var cart = {}, names = {}, sold = {};
   var $ = function(id){ return document.getElementById(id); };
@@ -805,14 +812,14 @@
       p.classList.toggle('on', q > 0);
       var out = l <= 0; p.classList.toggle('sold', out);
       var low = l <= Math.max(10, Math.ceil(c.cap * 0.2));  // only say how many are left once a pass type is running low
-      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (sku === 'HBTT-TK-VIP' ? ('Only ' + c.cap + ' VIP tickets' + (low ? ' · ' + l + ' left' : '')) : ('Only ' + c.cap + ' passes' + (low ? ' · ' + l + ' left' : ''))));
+      p.querySelector('.left-txt').textContent = out ? 'Sold out' : (sku === 'HBTT-TK-GA' ? 'General admission' : (sku === 'HBTT-TK-VIP' ? ('Only ' + c.cap + ' VIP tickets' + (low ? ' · ' + l + ' left' : '')) : (sku === 'HBTT-TK-SAT' ? ('Only ' + c.cap + ' VIP passes' + (low ? ' · ' + l + ' left' : '')) : ('Only ' + c.cap + ' passes' + (low ? ' · ' + l + ' left' : '')))));
       p.querySelector('[data-inc]').disabled = q >= cap(sku);
       p.querySelector('[data-dec]').disabled = q <= 0;
       var box = p.querySelector('.names'); var want = c.named ? q : 0;
       while (box.children.length > want) box.lastChild.remove();
       while (box.children.length < want) {
         var i = box.children.length, lab = document.createElement('label');
-        var unit = /^HBTT-TK-(SAT|SUN)$/.test(sku) ? 'pass' : 'ticket', ph = unit === 'pass' ? 'Who is taking the test' : 'Who is coming, as it reads on their ID';
+        var unit = /^HBTT-TK-SAT(GA)?$/.test(sku) ? 'pass' : 'ticket', ph = unit === 'pass' ? 'Who is taking the test' : 'Who is coming, as it reads on their ID';
         lab.innerHTML = 'Name on ' + unit + ' ' + (i + 1) + '<input type="text" autocomplete="off" data-sku="' + sku + '" data-i="' + i + '" placeholder="' + ph + '">';
         lab.querySelector('input').value = (names[sku] && names[sku][i]) || '';
         box.appendChild(lab);
