@@ -183,14 +183,26 @@ var state = { code:null, ticket:null, config:null, votes:{}, submitted:false, qu
 /* ---------- transport ---------- */
 async function api(action, payload, method){
   if (DEMO) return demoApi(action, payload||{});
-  if ((method||'GET') === 'GET'){
-    var q = new URLSearchParams(Object.assign({action:action}, payload||{}));
-    var r = await fetch(API + '?' + q.toString(), {method:'GET'});
-    return r.json();
+  // Apps Script can take 5 to 30 s and sometimes answers with a Google HTML error page: time out, then try again (3 tries)
+  var lastErr;
+  for (var attempt = 0; attempt < 3; attempt++){
+    var ctl = new AbortController(); var tm = setTimeout(function(){ ctl.abort(); }, 40000);
+    try{
+      var r;
+      if ((method||'GET') === 'GET'){
+        var q = new URLSearchParams(Object.assign({action:action, _:Date.now()}, payload||{}));
+        r = await fetch(API + '?' + q.toString(), {method:'GET', signal:ctl.signal});
+      } else {
+        // text/plain keeps it a "simple" request so Apps Script answers without a preflight
+        r = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({action:action}, payload||{})), signal:ctl.signal});
+      }
+      var txt = await r.text();
+      try { return JSON.parse(txt); } catch(e){ throw new Error('Google answered with an error page (HTTP ' + r.status + ')'); }
+    }catch(e){ lastErr = e; }
+    finally{ clearTimeout(tm); }
+    await new Promise(function(res){ setTimeout(res, 1500 * (attempt + 1)); });
   }
-  // text/plain keeps it a "simple" request so Apps Script answers without a preflight
-  var r2 = await fetch(API, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({action:action}, payload||{}))});
-  return r2.json();
+  throw lastErr || new Error('network');
 }
 function demoStore(){ try { return JSON.parse(localStorage.getItem('hbtt_sc') || '{}'); } catch(e){ return {}; } }
 function demoSave(s){ try { localStorage.setItem('hbtt_sc', JSON.stringify(s)); } catch(e){} }
@@ -220,9 +232,12 @@ async function signIn(code){
   code = fmt(code || '');
   if (/^[A-Z0-9]{4}$/.test(code)) code = 'HBTT-SAT-' + code;   // judges type the last 4; the prefix is fixed
   $('gateErr').hidden = true; $('gateBtn').disabled = true; $('gateBtn').textContent = 'Checking…';
+  var slowT = setTimeout(function(){ $('gateBtn').textContent = 'Still checking, the network is slow…'; }, 8000);
   try{
-    var cfg = await api('config'); state.config = cfg;
-    var t = await api('ticket', {code:code});
+    var cached = null; try { cached = JSON.parse(localStorage.getItem('hbtt_sc_cfg') || 'null'); } catch(e){}
+    var cfgP = (cached && Date.now() - cached.at < 600000) ? Promise.resolve(cached.cfg) : api('config').then(function(c){ try { localStorage.setItem('hbtt_sc_cfg', JSON.stringify({at:Date.now(), cfg:c})); } catch(e){} return c; });
+    var both = await Promise.all([cfgP, api('ticket', {code:code})]);
+    var cfg = both[0], t = both[1]; state.config = cfg;
     if (!t.ok && /^HBTT-SAT-/.test(code)){ var alt = code.replace('HBTT-SAT-', 'HBTT-SGA-'); var t2 = await api('ticket', {code:alt}); if (t2.ok){ t = t2; code = alt; } }   // Saturday GA passes carry the SGA prefix
     if (!t.ok) throw new Error(t.error || 'That code did not work.');
     if (!cfg.open) throw new Error('Scoring is closed right now. Doors open at noon.');
@@ -231,7 +246,7 @@ async function signIn(code){
     (t.votes || []).forEach(function(v){ state.votes[v.n] = v; });
     if (!KIOSK){ try { localStorage.setItem('hbtt_sc_code', code); } catch(e){} }
     $('who').innerHTML = '<b>' + escapeHtml(t.name || 'Judge') + '</b>' + code;
-    $('gate').hidden = true;
+    $('gate').hidden = true; clearTimeout(slowT);
     if (state.submitted){ showDone(); } else { renderEntries(); $('score').hidden = false; $('foot').hidden = false; }
   }catch(err){ $('gateErr').textContent = err.message; $('gateErr').hidden = false; }
   finally{ $('gateBtn').disabled = false; $('gateBtn').textContent = 'Start scoring'; }
@@ -271,27 +286,32 @@ function progress(){
   $('submitBtn').disabled = done < total;
   $('submitBtn').textContent = done < total ? ('Submit votes (' + (total-done) + ' left)') : 'Submit votes';
 }
-var saving = {};
-async function save(n){
+var saving = {}, saveT = {};
+function save(n){ clearTimeout(saveT[n]); setStatus('Saving…'); saveT[n] = setTimeout(function(){ saveNow(n); }, 1200); }
+async function saveNow(n){
   var v = state.votes[n]; if (!v) return;
-  setStatus('Saving…');
+  if (saving[n]) { state.queue.push(n); return; }   // a save for this entry is in flight: queue a follow-up
+  saving[n] = true;
   try{
     var r = await api('vote', {code:state.code, n:n, flavor:v.flavor||'', method:v.method||'', notes:v.notes||''}, 'POST');
     if (!r.ok) throw new Error(r.error||'save failed');
-    setStatus('Saved');
+    setStatus(state.queue.length ? 'Saving…' : 'Saved');
   }catch(e){
-    state.queue.push(n); setStatus('Offline · will retry', true);
-  }
+    state.queue.push(n); setStatus('Slow network · retrying', true);
+  }finally{ saving[n] = false; }
 }
-async function flush(){ if (!state.queue.length || !navigator.onLine) return; var q = Array.from(new Set(state.queue)); state.queue = []; for (var i=0;i<q.length;i++) await save(q[i]); }
+async function flush(){ if (!state.queue.length || !navigator.onLine) return; var q = Array.from(new Set(state.queue)); state.queue = []; for (var i=0;i<q.length;i++) await saveNow(q[i]); }
 setInterval(flush, 8000); window.addEventListener('online', flush);
 function setStatus(t, bad){ $('st').textContent = t; $('st').className = 'st' + (bad ? ' off' : ''); }
 
 $('submitBtn').addEventListener('click', async function(){
   if (!confirm('Submit your votes? You cannot change them after this.')) return;
-  await flush();
+  Object.keys(saveT).forEach(function(n){ clearTimeout(saveT[n]); state.queue.push(parseInt(n)); });
+  var b = $('submitBtn'); b.disabled = true; b.textContent = 'Saving your votes…';
+  await flush(); for (var w = 0; w < 60 && Object.keys(saving).some(function(k){ return saving[k]; }); w++) await new Promise(function(r){ setTimeout(r, 500); });
+  b.textContent = 'Submitting…';
   var r = await api('submit', {code:state.code}, 'POST');
-  if (!r.ok){ alert(r.error || 'Could not submit. Find a floor lead.'); return; }
+  if (!r.ok){ alert(r.error || 'Could not submit. Find a floor lead.'); b.disabled = false; b.textContent = 'Submit votes'; return; }
   state.submitted = true; showDone();
 });
 function showDone(){ $('score').hidden = true; $('foot').hidden = true; $('done').hidden = false; if (KIOSK){ $('doneOut').hidden = false; kioskIdle(20000); } }
