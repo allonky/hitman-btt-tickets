@@ -239,7 +239,7 @@ async function signIn(code){
     var cfgP = (cached && Date.now() - cached.at < 600000) ? Promise.resolve(cached.cfg) : api('config').then(function(c){ try { localStorage.setItem('hbtt_sc_cfg', JSON.stringify({at:Date.now(), cfg:c})); } catch(e){} return c; });
     var both = await Promise.all([cfgP, api('ticket', {code:code})]);
     var cfg = both[0], t = both[1]; state.config = cfg;
-    if (!t.ok && /^HBTT-SAT-/.test(code)){ var alt = code.replace('HBTT-SAT-', 'HBTT-SGA-'); var t2 = await api('ticket', {code:alt}); if (t2.ok){ t = t2; code = alt; } }   // Saturday GA passes carry the SGA prefix
+    if (!t.ok && /^HBTT-(SAT|SGA)-/.test(code)){ var alt = /^HBTT-SAT-/.test(code) ? code.replace('HBTT-SAT-', 'HBTT-SGA-') : code.replace('HBTT-SGA-', 'HBTT-SAT-'); var t2 = await api('ticket', {code:alt}); if (t2.ok){ t = t2; code = alt; } }   // GA passes were issued as SGA; the Sheet rows were renamed to SAT on event day, so try both
     if (!t.ok) throw new Error(t.error || 'That code did not work.');
     if (!cfg.open) throw new Error('Scoring is closed right now. Doors open at noon.');
     if (t.day && cfg.day && t.day !== cfg.day) throw new Error('This pass is for ' + t.day + '. Today is ' + cfg.day + '. Come back on your day.');
